@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Terms of Use &amp; General Terms of Sale | Skillart Group</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Bebas+Neue&display=swap" rel="stylesheet" />
+  <style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0d0d0d;--surface:#161616;--card:#1c1c1c;--border:#282828;
+  --red:#dc2626;--red-dk:#b91c1c;--red-lt:#ef4444;
+  --muted:#9ca3af;--dim:#6b7280;--white:#ffffff;
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--white);font-family:'Montserrat',sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{text-decoration:none;color:inherit}
+::-webkit-scrollbar{width:3px}::-webkit-scrollbar-track{background:var(--bg)}::-webkit-scrollbar-thumb{background:var(--red-dk);border-radius:2px}
+
+/* ── NAV ── */
+.nav{position:fixed;top:0;left:0;right:0;z-index:200;height:62px;background:rgba(13,13,13,.92);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border-bottom:1px solid rgba(255,255,255,.06)}
+.nav__inner{max-width:1200px;margin:0 auto;padding:0 32px;height:100%;display:flex;align-items:center;justify-content:space-between;gap:24px}
+.nav__logo{display:flex;align-items:center;text-decoration:none;flex-shrink:0;gap:10px}
+.nav__logo-icon{width:46px;height:46px;border-radius:50%;object-fit:cover;flex-shrink:0;display:block;mix-blend-mode:screen;filter:brightness(1.15)}
+.nav__logo-word{font-family:'Bebas Neue',sans-serif;font-size:21px;letter-spacing:.08em;color:#fff;line-height:1}
+.nav__logo-word em{font-style:normal;color:#fff}
+.nav__links{display:flex;align-items:center;gap:2px}
+.nav__link{font-size:11.5px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#9ca3af;padding:8px 16px;border-radius:6px;transition:all .2s;white-space:nowrap}
+.nav__link:hover{color:#fff;background:rgba(255,255,255,.04)}
+.nav__dd{position:relative;display:inline-flex;align-items:center}
+.nav__dd-menu{position:absolute;top:calc(100% + 10px);left:0;background:#1a1a1a;border:1px solid #2a2a2a;border-radius:10px;padding:6px;min-width:210px;display:flex;flex-direction:column;gap:2px;box-shadow:0 20px 50px rgba(0,0,0,.6);visibility:hidden;opacity:0;pointer-events:none;transition:opacity .15s .25s,visibility .15s .25s}
+.nav__dd-menu::before{content:'';position:absolute;bottom:100%;left:0;right:0;height:14px}
+.nav__dd:hover .nav__dd-menu{visibility:visible;opacity:1;pointer-events:auto;transition:opacity .1s,visibility .1s}
+.nav__dd-item{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:7px;font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:#9ca3af;transition:all .15s}
+.nav__dd-item:hover{background:rgba(255,255,255,.05);color:#fff}
+.nav__dd-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
+.nav__burger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:4px}
+.nav__burger span{display:block;width:22px;height:1.5px;background:#fff;border-radius:2px;transition:all .28s}
+.nav__burger.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg)}
+.nav__burger.open span:nth-child(2){opacity:0}
+.nav__burger.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg)}
+.nav__mobile{display:none;position:fixed;top:62px;left:0;right:0;background:rgba(13,13,13,.98);backdrop-filter:blur(24px);border-bottom:1px solid #2a2a2a;padding:16px 32px 24px;flex-direction:column;gap:2px;z-index:199}
+.nav__mobile.open{display:flex}
+.nav__mobile a{font-size:13px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#9ca3af;padding:13px 0;border-bottom:1px solid #2a2a2a;transition:color .2s}
+.nav__mobile a:hover{color:#fff}
+.nav__mobile a:last-child{border-bottom:none}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:13px 26px;border-radius:6px;font-family:'Montserrat',sans-serif;font-weight:700;font-size:13px;letter-spacing:.06em;text-transform:uppercase;transition:all .2s;cursor:pointer;border:none}
+.btn-wa{background:#25D366;color:#fff;padding:10px 20px;font-size:11.5px}.btn-wa:hover{background:#1fb85a;transform:translateY(-1px)}
+.btn-wa svg{width:15px;height:15px;flex-shrink:0}
+
+/* ── HERO ── */
+.legal-hero{padding:110px 32px 56px;text-align:center;border-bottom:1px solid var(--border);background:linear-gradient(180deg,rgba(220,38,38,.04) 0%,transparent 60%)}
+.legal-hero__eyebrow{font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--red);margin-bottom:14px}
+.legal-hero__title{font-family:'Bebas Neue',sans-serif;font-size:clamp(48px,7vw,96px);line-height:.92;letter-spacing:.03em;color:#fff;margin-bottom:16px}
+.legal-hero__sub{font-size:14px;color:var(--muted);max-width:520px;margin:0 auto;line-height:1.7}
+
+/* ── TABS ── */
+.tabs-bar{position:sticky;top:62px;z-index:100;background:var(--surface);border-bottom:1px solid var(--border);display:flex;gap:0}
+.tab-btn{flex:1;padding:16px;font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);background:none;border:none;cursor:pointer;border-bottom:2px solid transparent;transition:all .2s;font-family:'Montserrat',sans-serif}
+.tab-btn:hover{color:#fff}
+.tab-btn.active{color:#fff;border-bottom-color:var(--red)}
+
+/* ── CONTENT ── */
+.legal-body{max-width:860px;margin:0 auto;padding:56px 32px 96px}
+.legal-section{display:none}
+.legal-section.active{display:block}
+
+.legal-block{margin-bottom:48px}
+.legal-block__num{font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--red);margin-bottom:8px}
+.legal-block__title{font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:.04em;color:#fff;margin-bottom:16px}
+.legal-block p{font-size:13.5px;color:var(--muted);line-height:1.8;margin-bottom:12px}
+.legal-block p:last-child{margin-bottom:0}
+.legal-block strong{color:#fff;font-weight:700}
+.legal-block ul{list-style:none;display:flex;flex-direction:column;gap:8px;margin-top:8px}
+.legal-block ul li{font-size:13.5px;color:var(--muted);line-height:1.7;padding-left:18px;position:relative}
+.legal-block ul li::before{content:'—';position:absolute;left:0;color:var(--red)}
+
+.legal-divider{height:1px;background:var(--border);margin:48px 0}
+
+/* ── FOOTER ── */
+.footer{background:#161616;border-top:1px solid #2a2a2a}
+.footer__main{max-width:1200px;margin:0 auto;padding:64px 32px 48px;display:grid;grid-template-columns:2.2fr 1fr 1fr;gap:56px}
+.footer__wordmark{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:.08em;margin-bottom:16px}
+.footer__wordmark em{font-style:normal;color:#fff}
+.footer__desc{font-size:13px;color:#9ca3af;line-height:1.75;margin-bottom:20px;max-width:300px}
+.footer__legal{display:flex;align-items:flex-start;gap:8px;font-size:11px;color:#555;line-height:1.55}
+.footer__18{background:#dc2626;color:#fff;font-weight:800;font-size:10px;padding:2px 7px;border-radius:4px;flex-shrink:0;margin-top:1px}
+.footer__col-lbl{font-size:10px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#9ca3af;margin-bottom:16px}
+.footer__links{display:flex;flex-direction:column;gap:10px}
+.footer__links a{font-size:13px;color:rgba(255,255,255,.38);transition:color .2s}
+.footer__links a:hover{color:#fff}
+.footer__contact-lbl{font-size:10px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#9ca3af;margin-top:24px;margin-bottom:8px}
+.footer__wa{display:inline-flex;align-items:center;gap:8px;margin-top:12px;background:#25D366;color:#fff;font-size:11px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;padding:10px 16px;border-radius:7px;transition:all .2s}
+.footer__wa:hover{background:#20ba5c;transform:translateY(-1px)}
+.footer__wa svg{width:14px;height:14px}
+.footer__bottom{max-width:1200px;margin:0 auto;padding:18px 32px;border-top:1px solid #2a2a2a;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.footer__bottom p{font-size:12px;color:#555}
+
+@media(max-width:768px){.footer__main{grid-template-columns:1fr}.nav__links{display:none}.nav__burger{display:flex}.legal-body{padding:40px 20px 72px}.legal-hero{padding:90px 20px 40px}}
+  </style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav__inner">
+    <a href="index.html" class="nav__logo">
+      <img src="skillart-group-logo.png" class="nav__logo-icon" alt="Skillart Group">
+      <span class="nav__logo-word">SKILLART <em>GROUP</em></span>
+    </a>
+    <div class="nav__links">
+      <div class="nav__dd">
+        <span class="nav__link" style="cursor:default">Brands ▾</span>
+        <div class="nav__dd-menu">
+          <a href="skillart.html" class="nav__dd-item"><span class="nav__dd-dot" style="background:#dc2626"></span>Skillart</a>
+          <a href="cercle-des-parieurs.html" class="nav__dd-item"><span class="nav__dd-dot" style="background:#1d4ed8"></span>Cercle des Parieurs</a>
+          <a href="spinova.html" class="nav__dd-item"><span class="nav__dd-dot" style="background:#f97316"></span>Spinova</a>
+        </div>
+      </div>
+      <a href="index.html#markets" class="nav__link">Markets</a>
+      <a href="regulatory-compliance.html" class="nav__link">Compliance</a>
+    </div>
+    <a href="https://wa.me/31626070053" target="_blank" rel="noopener" class="btn btn-wa">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      Partner with us
+    </a>
+    <button class="nav__burger" id="burger"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<div class="nav__mobile" id="mobileNav">
+  <a href="index.html#brands">Brands</a>
+  <a href="skillart.html" style="padding-left:14px;font-size:11.5px;opacity:.7">→ Skillart</a>
+  <a href="cercle-des-parieurs.html" style="padding-left:14px;font-size:11.5px;opacity:.7">→ Cercle des Parieurs</a>
+  <a href="spinova.html" style="padding-left:14px;font-size:11.5px;opacity:.7">→ Spinova</a>
+  <a href="index.html#markets">Markets</a>
+  <a href="regulatory-compliance.html">Compliance</a>
+  <a href="https://wa.me/31626070053" target="_blank" style="color:#4ade80;border-bottom:none">💬 WhatsApp Business</a>
+</div>
+
+<!-- HERO -->
+<div class="legal-hero">
+  <div class="legal-hero__eyebrow">Legal Documents</div>
+  <h1 class="legal-hero__title">Terms &amp; Conditions</h1>
+  <p class="legal-hero__sub">Terms of Use and General Terms of Sale applicable to all B2B partnerships entered into with Skillart Group.</p>
+</div>
+
+<!-- TABS -->
+<div class="tabs-bar">
+  <button class="tab-btn active" onclick="switchTab('cgu', this)">Terms of Use</button>
+  <button class="tab-btn" onclick="switchTab('cgv', this)">General Terms of Sale</button>
+</div>
+
+<!-- CONTENT -->
+<div class="legal-body">
+
+  <!-- CGU -->
+  <div class="legal-section active" id="cgu">
+
+    <div class="legal-block">
+      <div class="legal-block__num">Article 1</div>
+      <div class="legal-block__title">Overview</div>
+      <p>The website <strong>skillartgroup.com</strong> is published by <strong>SKILLART GROUP</strong>, a company registered in the State of Wyoming, United States. This is a strictly B2B website, intended for online gaming operators, agencies and professional partners wishing to establish media partnerships with Skillart Group.</p>
+      <p>Publication Director: Skillart Group — Contact: <a href="https://wa.me/31626070053" style="color:var(--red-lt)">WhatsApp Business</a></p>
+      <p>Hosting: Porkbun LLC — 2530 NW 23rd Ave, Portland, OR 97210, USA.</p>
+    </div>
+
+    <div class="legal-divider"></div>
+
+    <div class="legal-block">
+      <div class="legal-block__num">Article 2</div>
+      <div class="legal-block__title">Intellectual Property</div>
+      <p>All content on the website <strong>skillartgroup.com</strong> — texts, images, logos, data, graphics, videos, brand names — is the exclusive property of <strong>SKILLART GROUP</strong> or is used under authorisation.</p>
+      <p>Any reproduction, distribution, modification or exploitation, even partial, of this content without prior written consent from Skillart Group is strictly prohibited and constitutes an infringement.</p>
+      <p>The brands <strong>Skillart</strong>, <strong>Cercle des Parieurs</strong> and <strong>Spinova</strong> are trademarks owned by Skillart Group. Unauthorised use is prohibited.</p>
+    </div>
+
+    <div class="legal-divider"></div>
+
+    <div class="legal-block">
+      <div class="legal-block__num">Article 3</div>
+      <div class="legal-block__title">Personal Data Protection</div>
+      <p>In the context of browsing the site and B2B exchanges, Skillart Group may collect personal data (name, professional email address, phone number) solely for the purpose of managing partnerships.</p>
+      <p>This data is processed in accordance with the <strong>General Data Protection Regulation (GDPR)</strong> and is never shared with third parties without explicit consent.</p>
+      <p>In accordance with applicable regulations, you have the following rights:</p>
+      <ul>
+        <li>Right of access to your personal data</li>
+        <li>Right of rectification or erasure</li>
+        <li>Right to data portability</li>
+        <li>Right to object to processing</li>
+      </ul>
+      <p style="margin-top:12px">To exercise these rights, contact us via <a href="https://wa.me/31626070053" style="color:var(--red-lt)">WhatsApp Business</a>.</p>
+    </div>
+
+    <div class="legal-divider"></div>
+
+    <div class="legal-block">
+      <div class="legal-block__num">Article 4</div>
+      <div class="legal-block__title">Cookies</div>
+      <p>The website <strong>skillartgroup.com</strong> uses technical cookies necessary for its proper operation, as well as analytical cookies to improve the user experience.</p>
+      <p>You may configure your browser at any time to refuse or delete cookies. Refusing technical cookies may affect certain features of the site.</p>
+    </div>
+
+    <div class="legal-divider"></div>
+
+    <div class="legal-block">
+      <div class="legal-block__num">Article 5</div>
+      <div class="legal-block__title">Limitation of Liability</div>
+      <p>Skillart Group strives to keep the information on the site accurate and up to date. However, the company cannot be held liable for errors, omissions or results obtained through improper use of the published information.</p>
+      <p>Skillart Group disclaims all liability for site interruptions, viruses or any other element that may cause damage to the user's equipment or data.</p>
+      <p><strong>Reminder:</strong> Skillart Group is a media provider. We are not a gambling operator and do not offer any betting or casino services directly to end users.</p>
+    </div>
+
+    <div class="legal-divider"></div>
+
+    <div class="legal-block">
+      <div class="legal-block__num">Article 6</div>
+      <div class="legal-block__title">Governing Law</div>
+      <p>These Terms of Use are governed by the laws of the State of <strong>Wyoming, United States</strong>. In the event of a dispute, and in the absence of an amicable resolution, the competent courts of the State of Wyoming shall have sole jurisdiction.</p>
+      <p>Users residing outside the United States are responsible for complying with applicable local legislation when using the site.</p>
+    </div>
+
+  </div>
+
+  <!-- GTS -->
+  <div class="legal-section" id="cgv">
+
+    <div class="legal-block">
+      <div class="legal-block__num">Article 1</div>
+      <div class="legal-block__title">Purpose</div>
+      <p>These <strong>General Terms of Sale (GTS)</strong> govern all B2B commercial relations between <strong>SKILLART GROUP</strong> (hereinafter "the Provider") and any operator, agency or professional partner (hereinafter "the Partner") wishing to enter into a media partnership agreement.</p>
+      <p>Any order or partnership agreement implies the Partner's full and unconditional acceptance of these GTS.</p>
+    </div>
+
+    <div class="legal-divider"></div>
+
+    <div class="legal-block">
+      <div class="legal-block__num">Article 2</div>
+      <div class="legal-block__title">Services Offered</div>
+      <p>Skillart Group provides <strong>performance marketing and affiliate media services</strong> exclusively to duly licensed online gaming operators. Services include:</p>
+      <ul>
+        <li>Qualified player acquisition (First-Time Depositors) via our media brands</li>
+        <li>Creation and distribution of promotional content across our channels (Telegram, TikTok, Instagram, Paid Ads)</li>
+        <li>Performance reporting and conversion tracking</li>
+        <li>Exclusive partnerships on operator promotions</li>
+        <li>Coverage across multiple geographic markets (France, Belgium, Canada, Côte d'Ivoire, Cameroon, Senegal)</li>
+      </ul>
+    </div>
+
+    <div class="legal-divider"></div>
+
+    <div class="legal-block">
+      <div class="legal-block__num">Article 3</div>
+      <div class="legal-block__title">Financial Terms</div>
+      <p>The remuneration models offered by Skillart Group are as follows, depending on the market:</p>
+      <ul>
+        <li><strong>CPA (Cost Per Acquisition)</strong> — Fixed fee per qualified depositing player, applicable in Tier 1 markets (France, Belgium, Canada)</li>
+        <li><strong>Hybrid</strong> — Combination of CPA and RevShare, in Tier 1 markets</li>
+        <li><strong>RevShare (Revenue Share)</strong> — Share of net revenues generated by referred players, applicable in African markets (CI, CM, SN)</li>
+      </ul>
+      <p style="margin-top:12px">Rates and amounts are negotiated on a case-by-case basis and formalised in the IO signed between the parties. Payments are made according to the terms defined in the commercial agreement (frequency, minimum threshold, payment method).</p>
+      <p>Any payment delay beyond the agreed deadlines may result in campaign suspension without prior notice.</p>
+    </div>
+
+    <div class="legal-divider"></div>
+
+    <div class="legal-block">
+      <div class="legal-block__num">Article 4</div>
+      <div class="legal-block__title">Obligations of the Parties</div>
+      <p><strong>Skillart Group's obligations:</strong></p>
+      <ul>
+        <li>Implement agreed campaigns within the deadlines and according to the IO specifications</li>
+        <li>Provide regular and transparent performance reporting</li>
+        <li>Comply with the creative and regulatory guidelines communicated by the Partner</li>
+        <li>Only promote duly licensed operators</li>
+      </ul>
+      <p style="margin-top:16px"><strong>Partner's obligations:</strong></p>
+      <ul>
+        <li>Provide functional tracking links and reporting access within agreed deadlines</li>
+        <li>Ensure the validity and maintenance of its operating licence in each relevant market</li>
+        <li>Settle amounts due within agreed deadlines</li>
+        <li>Communicate any change in offer conditions that may impact ongoing campaigns</li>
+      </ul>
+    </div>
+
+    <div class="legal-divider"></div>
+
+    <div class="legal-block">
+      <div class="legal-block__num">Article 5</div>
+      <div class="legal-block__title">Termination</div>
+      <p>Either party may terminate the partnership with <strong>30 days' written notice</strong> (email or WhatsApp), unless otherwise stipulated in the IO.</p>
+      <p>Skillart Group reserves the right to terminate any agreement immediately and without compensation in the event of:</p>
+      <ul>
+        <li>Loss or suspension of the Partner operator's licence</li>
+        <li>Persistent non-payment beyond 15 days after reminder</li>
+        <li>Breach of applicable legal or regulatory obligations</li>
+        <li>Fraudulent behaviour or attempted manipulation of statistics</li>
+      </ul>
+      <p style="margin-top:12px">Upon termination, amounts owed to Skillart Group for conversions made prior to the effective date remain payable.</p>
+    </div>
+
+    <div class="legal-divider"></div>
+
+    <div class="legal-block">
+      <div class="legal-block__num">Article 6</div>
+      <div class="legal-block__title">Confidentiality</div>
+      <p>Both parties mutually agree to maintain the <strong>strict confidentiality</strong> of commercial, technical and financial information exchanged in the context of the partnership, throughout the duration of the agreement and for a period of <strong>2 years</strong> after its termination.</p>
+      <p>This confidentiality obligation does not apply to information already in the public domain or whose disclosure is required by a competent legal authority.</p>
+    </div>
+
+    <div class="legal-divider"></div>
+
+    <div class="legal-block">
+      <div class="legal-block__num">Article 7</div>
+      <div class="legal-block__title">Governing Law &amp; Disputes</div>
+      <p>These GTS are governed by the laws of the State of <strong>Wyoming, United States</strong>. Any dispute relating to their interpretation or performance shall be submitted, in the absence of an amicable resolution within 30 days, to the competent courts of the State of Wyoming.</p>
+      <p>The parties agree to seek an amicable solution as a priority before taking any legal action.</p>
+    </div>
+
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer__main">
+    <div>
+      <div class="footer__wordmark">SKILLART <em>GROUP</em></div>
+      <p class="footer__desc">Skillart Group is a B2B sports media company. We do not organise, facilitate, or operate gambling activities in any form.</p>
+      <div class="footer__legal"><span class="footer__18">18+</span>All promoted services are for adults aged 18+ only. <a href="regulatory-compliance.html" style="color:inherit;text-decoration:underline;margin-left:4px">Learn more.</a></div>
+    </div>
+    <div>
+      <div class="footer__col-lbl">Brands</div>
+      <div class="footer__links">
+        <a href="skillart.html">Skillart</a>
+        <a href="cercle-des-parieurs.html">Cercle des Parieurs</a>
+        <a href="spinova.html">Spinova</a>
+      </div>
+    </div>
+    <div>
+      <div class="footer__col-lbl">Legal</div>
+      <div class="footer__links">
+        <a href="regulatory-compliance.html">Regulatory Compliance</a>
+        <a href="legal.html" style="color:rgba(255,255,255,.7)">CGU &amp; CGV</a>
+      </div>
+      <div class="footer__contact-lbl">B2B Partnerships</div>
+      <a href="https://wa.me/31626070053" target="_blank" rel="noopener" class="footer__wa">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Wanna partner with us?
+      </a>
+    </div>
+  </div>
+  <div class="footer__bottom">
+    <p>© 2026 Skillart Group. All rights reserved.</p>
+  </div>
+</footer>
+
+<script>
+function switchTab(id, btn) {
+  document.querySelectorAll('.legal-section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+  window.scrollTo({top: 0, behavior: 'smooth'});
+}
+const burger = document.getElementById('burger'), mob = document.getElementById('mobileNav');
+if (burger && mob) burger.addEventListener('click', () => { burger.classList.toggle('open'); mob.classList.toggle('open'); });
+</script>
+</body>
+</html>

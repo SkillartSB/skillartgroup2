@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Compliance | Skillart Group</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Bebas+Neue&display=swap" rel="stylesheet" />
+  <style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0d0d0d;--surface:#161616;--card:#1c1c1c;--border:#282828;
+  --red:#dc2626;--red-dk:#b91c1c;--red-lt:#ef4444;
+  --muted:#9ca3af;--dim:#6b7280;--white:#ffffff;
+  --r:10px;
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--white);font-family:'Montserrat',sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{text-decoration:none;color:inherit}
+::-webkit-scrollbar{width:3px}::-webkit-scrollbar-track{background:var(--bg)}::-webkit-scrollbar-thumb{background:var(--red-dk);border-radius:2px}
+
+/* ── NAV ──────────────────────────────────────────── */
+.nav{
+  position:fixed;top:0;left:0;right:0;z-index:200;
+  height:62px;
+  background:rgba(13,13,13,.92);
+  backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);
+  border-bottom:1px solid rgba(255,255,255,.06);
+}
+.nav__inner{
+  max-width:1200px;margin:0 auto;padding:0 32px;
+  height:100%;display:flex;align-items:center;justify-content:space-between;gap:24px;
+}
+.nav__logo{display:flex;align-items:center;gap:10px;text-decoration:none;flex-shrink:0}
+.nav__logo-icon{height:44px;width:auto;max-width:56px;object-fit:contain;flex-shrink:0;display:block;mix-blend-mode:screen;filter:invert(1) brightness(2)}
+.nav__logo-word{
+  font-family:'Bebas Neue',sans-serif;font-size:21px;letter-spacing:.08em;
+  color:#fff;line-height:1;
+}
+.nav__logo-word em{color:#fff;font-style:normal}
+.nav__links{display:flex;align-items:center;gap:2px}
+.nav__link{
+  font-size:11.5px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--muted);padding:8px 16px;border-radius:6px;transition:all .2s;white-space:nowrap;
+}
+.nav__link:hover,.nav__link.active{color:#fff;background:rgba(255,255,255,.04)}
+.nav__dd{position:relative;display:inline-flex;align-items:center}
+.nav__dd-menu{
+  position:absolute;top:calc(100% + 10px);left:0;
+  background:#1a1a1a;border:1px solid var(--border);border-radius:10px;
+  padding:6px;min-width:210px;
+  display:none;flex-direction:column;gap:2px;
+  box-shadow:0 20px 50px rgba(0,0,0,.6);
+}
+.nav__dd-menu::before{content:'';position:absolute;bottom:100%;left:0;right:0;height:14px}
+.nav__dd:hover .nav__dd-menu{visibility:visible;opacity:1;pointer-events:auto;transition:opacity .1s,visibility .1s}
+.nav__dd-item{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:7px;font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);transition:all .15s}
+.nav__dd-item:hover{background:rgba(255,255,255,.045);color:#fff}
+.nav__dd-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
+.nav__burger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:4px}
+.nav__burger span{display:block;width:22px;height:1.5px;background:#fff;border-radius:2px;transition:all .28s}
+.nav__burger.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg)}
+.nav__burger.open span:nth-child(2){opacity:0}
+.nav__burger.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg)}
+.nav__mobile{display:none;position:fixed;top:62px;left:0;right:0;background:rgba(13,13,13,.98);backdrop-filter:blur(24px);border-bottom:1px solid var(--border);padding:16px 32px 24px;flex-direction:column;gap:2px;z-index:199}
+.nav__mobile.open{display:flex}
+.nav__mobile a{font-size:13px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);padding:13px 0;border-bottom:1px solid var(--border);transition:color .2s}
+.nav__mobile a:hover{color:#fff}
+.nav__mobile a:last-child{border-bottom:none}
+
+/* ── UTIL ─────────────────────────────────────────── */
+.container{max-width:1100px;margin:0 auto;padding:0 32px}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:13px 26px;border-radius:6px;font-family:'Montserrat',sans-serif;font-weight:700;font-size:13px;letter-spacing:.06em;text-transform:uppercase;transition:all .2s;cursor:pointer;border:none}
+.btn-red{background:var(--red);color:#fff}.btn-red:hover{background:var(--red-dk);transform:translateY(-1px)}
+.btn-outline{background:transparent;color:var(--muted);border:1px solid var(--border)}.btn-outline:hover{border-color:#555;color:#fff}
+.btn-wa{background:#25D366;color:#fff}.btn-wa:hover{background:#1fb85a;transform:translateY(-1px)}
+.btn-wa svg{width:15px;height:15px}
+
+/* ── HERO ─────────────────────────────────────────── */
+.reg-hero{
+  padding:130px 32px 72px;text-align:center;
+  background:linear-gradient(180deg,rgba(220,38,38,.04) 0%,transparent 60%);
+  border-bottom:1px solid var(--border);
+}
+.reg-hero__title{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(52px,8vw,108px);
+  line-height:.9;letter-spacing:.02em;margin-bottom:20px;color:#fff;
+}
+.reg-hero__title span{color:var(--red)}
+.reg-hero__sub{
+  font-size:15px;color:var(--muted);line-height:1.75;
+  max-width:560px;margin:0 auto;
+}
+
+/* ── PRINCIPLES ───────────────────────────────────── */
+.section{padding:56px 32px 72px}
+.core-title{
+  font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--red);margin-bottom:28px;
+}
+
+.principles-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;max-width:860px}
+.principle-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:24px 22px}
+.principle-card__icon{font-size:22px;margin-bottom:12px}
+.principle-card__title{font-size:11px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:#fff;margin-bottom:8px}
+.principle-card__text{font-size:12px;color:var(--muted);line-height:1.7}
+
+/* ── CONTACT BOX ──────────────────────────────────── */
+.contact-section{padding:0 32px 96px}
+.contact-box{
+  max-width:560px;margin:0 auto;text-align:center;
+  background:var(--card);border:1px solid var(--border);border-radius:16px;padding:48px 40px;
+}
+.contact-box h2{font-family:'Bebas Neue',sans-serif;font-size:clamp(44px,6vw,72px);line-height:.92;letter-spacing:.03em;margin-bottom:14px;color:#fff}
+.contact-box h2 span{color:var(--red)}
+.contact-box p{font-size:14px;color:var(--muted);line-height:1.7;margin-bottom:28px}
+.contact-btns{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
+
+/* ── FOOTER ───────────────────────────────────────── */
+.footer{background:#161616;border-top:1px solid #2a2a2a}
+.footer__main{max-width:1200px;margin:0 auto;padding:64px 32px 48px;display:grid;grid-template-columns:2.2fr 1fr 1fr;gap:56px}
+.footer__wordmark{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:.08em;margin-bottom:16px}
+.footer__wordmark em{font-style:normal;color:#fff}
+.footer__desc{font-size:13px;color:#9ca3af;line-height:1.75;margin-bottom:20px;max-width:300px}
+.footer__legal{display:flex;align-items:flex-start;gap:8px;font-size:11px;color:#555;line-height:1.55}
+.footer__18{background:#dc2626;color:#fff;font-weight:800;font-size:10px;padding:2px 7px;border-radius:4px;flex-shrink:0;margin-top:1px}
+.footer__col-lbl{font-size:10px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#9ca3af;margin-bottom:16px}
+.footer__links{display:flex;flex-direction:column;gap:10px}
+.footer__links a{font-size:13px;color:rgba(255,255,255,.38);transition:color .2s}
+.footer__links a:hover{color:#fff}
+.footer__contact-lbl{font-size:10px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#9ca3af;margin-top:24px;margin-bottom:8px}
+.footer__email{font-size:12.5px;color:rgba(255,255,255,.4);display:block;transition:color .2s}
+.footer__email:hover{color:#fff}
+.footer__wa{display:inline-flex;align-items:center;gap:8px;margin-top:12px;background:#25D366;color:#fff;font-size:11px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;padding:10px 16px;border-radius:7px;transition:all .2s}
+.footer__wa:hover{background:#20ba5c;transform:translateY(-1px)}
+.footer__wa svg{width:14px;height:14px}
+.footer__bottom{max-width:1200px;margin:0 auto;padding:18px 32px;border-top:1px solid #2a2a2a;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.footer__bottom p{font-size:12px;color:#555}
+
+@media(max-width:900px){.principles-grid{grid-template-columns:1fr 1fr}.footer__main{grid-template-columns:1fr}}
+@media(max-width:768px){.nav__links{display:none}.nav__burger{display:flex}}
+@media(max-width:600px){.principles-grid{grid-template-columns:1fr}.contact-box{padding:32px 24px}}
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav__inner">
+    <a href="index.html" class="nav__logo">
+      <img src="skillart-group-logo.png" alt="Skillart Group" class="nav__logo-icon">
+      <span class="nav__logo-word">SKILLART <em>GROUP</em></span>
+    </a>
+    <div class="nav__links">
+      <div class="nav__dd">
+        <span class="nav__link" style="cursor:default">Brands ▾</span>
+        <div class="nav__dd-menu">
+          <a href="skillart.html" class="nav__dd-item"><span class="nav__dd-dot" style="background:#dc2626"></span>Skillart</a>
+          <a href="cercle-des-parieurs.html" class="nav__dd-item"><span class="nav__dd-dot" style="background:#1d4ed8"></span>Cercle des Parieurs</a>
+          <a href="spinova.html" class="nav__dd-item"><span class="nav__dd-dot" style="background:#f97316"></span>Spinova</a>
+        </div>
+      </div>
+      <a href="index.html#markets" class="nav__link">Markets</a>
+      <a href="regulatory-compliance.html" class="nav__link active">Compliance</a>
+    </div>
+    <a href="https://wa.me/31626070053" target="_blank" rel="noopener" class="btn btn-wa" style="padding:10px 20px;font-size:11.5px">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      Partner with us
+    </a>
+    <button class="nav__burger" id="burger"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<div class="nav__mobile" id="mobileNav">
+  <a href="index.html#brands">Brands</a>
+  <a href="skillart.html" style="padding-left:14px;font-size:11.5px;opacity:.7">→ Skillart</a>
+  <a href="cercle-des-parieurs.html" style="padding-left:14px;font-size:11.5px;opacity:.7">→ Cercle des Parieurs</a>
+  <a href="spinova.html" style="padding-left:14px;font-size:11.5px;opacity:.7">→ Spinova</a>
+  <a href="index.html#markets">Markets</a>
+  <a href="regulatory-compliance.html" style="color:#fff">Compliance</a>
+  <a href="https://wa.me/31626070053" target="_blank" style="color:#4ade80;border-bottom:none">💬 WhatsApp Business</a>
+</div>
+
+<!-- HERO -->
+<div class="reg-hero">
+  <h1 class="reg-hero__title">OUR COMPLIANCE<br><span>FRAMEWORK</span></h1>
+  <p class="reg-hero__sub">
+    Skillart Group operates as a digital media organisation. We are not a gambling operator.
+  </p>
+</div>
+
+<!-- PRINCIPLES -->
+<div class="section">
+  <div class="container">
+    <div class="core-title">Core Principles</div>
+    <div class="principles-grid">
+      <div class="principle-card">
+        <div class="principle-card__icon">🚫</div>
+        <div class="principle-card__title">Not a Gambling Operator</div>
+        <div class="principle-card__text">Skillart Group does not accept wagers, hold player funds, or operate gaming platforms. We are strictly a media intermediary.</div>
+      </div>
+      <div class="principle-card">
+        <div class="principle-card__icon">🛡️</div>
+        <div class="principle-card__title">Responsible Gambling</div>
+        <div class="principle-card__text">We actively promote responsible gambling messaging across all brands and platforms, with links to support services in every market.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CONTACT -->
+<div class="contact-section">
+  <div class="contact-box">
+    <h2>COMPLIANCE<br><span>ENQUIRIES</span></h2>
+    <p>For compliance-related questions, regulatory enquiries, or to report a concern, contact our dedicated compliance team directly.</p>
+    <div class="contact-btns">
+      <a href="mailto:compliance@skillartgroup.com" class="btn btn-red">compliance@skillartgroup.com</a>
+      <a href="index.html" class="btn btn-outline">← Back to Home</a>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer__main">
+    <div>
+      <div class="footer__wordmark">SKILLART <em>GROUP</em></div>
+      <p class="footer__desc">Skillart Group is a B2B sports media that runs brands. We do not organise, facilitate, or operate gambling activities in any form.</p>
+      <div class="footer__legal"><span class="footer__18">18+</span>All promoted services are for adults aged 18+ only. <a href="regulatory-compliance.html" style="color:inherit;text-decoration:underline;margin-left:4px">Learn more.</a></div>
+    </div>
+    <div>
+      <div class="footer__col-lbl">Brands</div>
+      <div class="footer__links">
+        <a href="skillart.html">Skillart</a>
+        <a href="cercle-des-parieurs.html">Cercle des Parieurs</a>
+        <a href="spinova.html">Spinova</a>
+      </div>
+    </div>
+    <div>
+      <div class="footer__col-lbl">Legal</div>
+      <div class="footer__links">
+        <a href="regulatory-compliance.html">Regulatory Compliance</a>
+        <a href="legal.html">CGU &amp; CGV</a>
+      </div>
+      <div class="footer__contact-lbl">B2B Partnerships</div>
+      <a href="https://wa.me/31626070053" target="_blank" rel="noopener" class="footer__wa">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Wanna partner with us?
+      </a>
+    </div>
+  </div>
+  <div class="footer__bottom">
+    <p>© 2026 Skillart Group. All rights reserved.</p>
+  </div>
+</footer>
+
+<script>
+const burger=document.getElementById('burger'),mob=document.getElementById('mobileNav');
+if(burger&&mob)burger.addEventListener('click',()=>{burger.classList.toggle('open');mob.classList.toggle('open')});
+</script>
+</body>
+</html>
