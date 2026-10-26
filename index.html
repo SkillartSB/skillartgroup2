@@ -66,12 +66,13 @@
   .puce.p2 { right: -54px; bottom: 22%; animation: flotte 7s ease-in-out infinite reverse; }
   @keyframes flotte { 50% { transform: translateY(-12px); } }
 
-  /* ── Bandeau des pays ── */
-  .pays { border-block: 1px solid var(--trait); overflow: hidden; padding: 18px 0; background: var(--nuit-2); }
-  .defile { display: flex; gap: 46px; width: max-content; animation: defile 38s linear infinite; font-family: var(--titre); font-weight: 600; font-size: 19px; color: #B9B6D3; }
-  .defile span { display: flex; align-items: center; gap: 46px; }
-  .defile span::after { content: '✦'; color: var(--violet-clair); font-size: 13px; }
-  @keyframes defile { to { transform: translateX(-50%); } }
+  /* ── Bandeau des partenaires ── */
+  .partenaires { border-block: 1px solid var(--trait); padding: 30px 0; background: var(--nuit-2); }
+  .partenaires .enveloppe { display: flex; align-items: center; gap: 28px 56px; flex-wrap: wrap; justify-content: center; }
+  .partenaires .titre-p { font-family: var(--titre); font-size: 12px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--doux); }
+  .marques { display: flex; align-items: center; gap: 28px 58px; flex-wrap: wrap; justify-content: center; }
+  .marques img { width: auto; opacity: 0.55; transition: opacity .3s; }
+  .marques img:hover { opacity: 1; }
 
   /* ── Sections ── */
   section.bloc { padding: 140px 0; position: relative; }
@@ -137,7 +138,7 @@
   .sans-js .apparait { opacity: 1; transform: none; }
   @media (prefers-reduced-motion: reduce) {
     .apparait { opacity: 1; transform: none; transition: none; }
-    .defile, .puce, .surtitre::before { animation: none; }
+    .puce, .surtitre::before { animation: none; }
   }
 
   @media (max-width: 900px) {
@@ -187,10 +188,15 @@
   </div>
 </section>
 
-<div class="pays" aria-label="Markets">
-  <div class="defile">
-    <span>Côte d’Ivoire</span><span>Burkina Faso</span><span>Benin</span><span>Togo</span><span>Cameroon</span><span>Senegal</span><span>DR Congo</span><span>Mali</span><span>France</span><span>Kenya</span><span>Nigeria</span>
-    <span>Côte d’Ivoire</span><span>Burkina Faso</span><span>Benin</span><span>Togo</span><span>Cameroon</span><span>Senegal</span><span>DR Congo</span><span>Mali</span><span>France</span><span>Kenya</span><span>Nigeria</span>
+<div class="partenaires">
+  <div class="enveloppe">
+    <span class="titre-p">Trusted by</span>
+    <div class="marques">
+      <img src="img/partenaire-pmu.png" alt="PMU" height="40" style="height:40px">
+      <img src="img/partenaire-betsson.png" alt="Betsson" height="25" style="height:25px">
+      <img src="img/partenaire-olybet.png" alt="OlyBet" height="33" style="height:33px">
+      <img src="img/partenaire-win1.png" alt="1win" height="33" style="height:33px">
+    </div>
   </div>
 </div>
 
