@@ -1,825 +1,339 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Skillart Group | B2B Sports Media</title>
-  <meta name="description" content="Skillart Group operates three premium sports media brands across five regulated markets." />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&family=Bebas+Neue&display=swap" rel="stylesheet" />
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Skillart Group · NinjaScores</title>
+<meta name="description" content="Skillart Group builds NinjaScores, the live scores, odds and predictions app used by 11,000 football fans every month across French-speaking Africa and France.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
-/* ── RESET ───────────────────────────────────────── */
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
-body{background:#0d0d0d;color:#fff;font-family:'Montserrat',sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
-a{text-decoration:none;color:inherit}
-img{display:block;max-width:100%}
-::-webkit-scrollbar{width:3px}
-::-webkit-scrollbar-track{background:#0d0d0d}
-::-webkit-scrollbar-thumb{background:#dc2626;border-radius:2px}
+  :root {
+    --nuit: #05060F;
+    --nuit-2: #0A0D24;
+    --carte: rgba(255, 255, 255, 0.04);
+    --trait: rgba(255, 255, 255, 0.09);
+    --texte: #F3F2FA;
+    --doux: #8E8BAA;
+    --violet: #6B3CF0;
+    --violet-clair: #9C7BFF;
+    --vert: #2BFF9E;
+    --titre: 'Plus Jakarta Sans', system-ui, sans-serif;
+    --corps: 'DM Sans', system-ui, sans-serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--nuit); color: var(--texte); font-family: var(--corps); font-size: 17px; line-height: 1.6; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+  a { color: inherit; text-decoration: none; }
+  img { display: block; max-width: 100%; }
+  .chiffre { font-variant-numeric: tabular-nums; }
+  .enveloppe { width: min(1180px, calc(100% - 40px)); margin: 0 auto; }
 
-/* ── VARIABLES ───────────────────────────────────── */
-:root{
-  --bg:#0d0d0d;
-  --surface:#161616;
-  --card:#1c1c1c;
-  --border:#282828;
-  --border2:#333;
-  --red:#dc2626;
-  --red2:#b91c1c;
-  --red-glow:rgba(185,28,28,.55);
-  --muted:#8a8a8a;
-  --dim:#555;
-  --green:#22c55e;
-  --r:10px;
-}
+  /* ── En-tête ── */
+  header { position: fixed; inset: 0 0 auto; z-index: 50; transition: background .3s, border-color .3s; border-bottom: 1px solid transparent; }
+  header.colle { background: rgba(5, 6, 15, 0.78); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border-color: var(--trait); }
+  .barre { display: flex; align-items: center; justify-content: space-between; height: 76px; }
+  .logo { display: flex; align-items: center; gap: 12px; font-family: var(--titre); font-weight: 800; letter-spacing: 0.14em; font-size: 14px; }
+  .logo i { width: 30px; height: 30px; border-radius: 9px; background: linear-gradient(140deg, var(--violet-clair), var(--violet) 55%, #2C1A7A); box-shadow: 0 0 24px rgba(107, 60, 240, .6); display: grid; place-items: center; font-style: normal; font-size: 15px; letter-spacing: 0; }
+  nav { display: flex; gap: 34px; font-size: 15px; color: #CFCDE2; }
+  nav a:hover { color: #fff; }
+  .pilule { display: inline-flex; align-items: center; gap: 8px; border: 1px solid rgba(255,255,255,.4); border-radius: 999px; padding: 9px 18px; font-size: 15px; font-weight: 500; transition: background .2s, color .2s; }
+  .pilule:hover { background: #fff; color: var(--nuit); }
+  .pilule.plein { background: #fff; color: var(--nuit); border-color: #fff; font-weight: 700; }
+  .pilule.plein:hover { background: var(--vert); border-color: var(--vert); }
+  a:focus-visible, button:focus-visible { outline: 2px solid var(--vert); outline-offset: 3px; border-radius: 999px; }
 
-/* ── UTILS ───────────────────────────────────────── */
-.container{max-width:1200px;margin:0 auto;padding:0 32px}
-.section-eyebrow{font-size:11px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--red);margin-bottom:14px}
+  /* ── Accroche ── */
+  .accroche { position: relative; min-height: 100vh; display: flex; align-items: center; padding: 120px 0 80px; overflow: hidden; }
+  .accroche canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
+  .halo { position: absolute; width: 900px; height: 900px; right: -220px; top: -160px; border-radius: 50%; background: radial-gradient(closest-side, rgba(107, 60, 240, .55), rgba(107, 60, 240, .12) 55%, transparent 72%); filter: blur(10px); pointer-events: none; }
+  .accroche .enveloppe { position: relative; display: grid; grid-template-columns: 1.25fr 0.75fr; gap: 40px; align-items: center; }
+  .surtitre { display: inline-flex; align-items: center; gap: 10px; font-size: 13px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--vert); }
+  .surtitre::before { content: ''; width: 8px; height: 8px; border-radius: 50%; background: var(--vert); box-shadow: 0 0 12px var(--vert); animation: pouls 2s infinite; }
+  @keyframes pouls { 50% { opacity: .35; } }
+  h1 { font-family: var(--titre); font-weight: 700; font-size: clamp(54px, 8.4vw, 118px); line-height: 0.98; letter-spacing: -0.045em; margin: 22px 0 28px; text-wrap: balance; }
+  h1 em { font-style: normal; background: linear-gradient(100deg, var(--violet-clair), #5B8CFF 60%, var(--vert)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .chapo { font-size: 20px; color: #C9C7DC; max-width: 560px; }
+  .actions { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 38px; }
 
-/* ── BADGE ───────────────────────────────────────── */
-.badge{display:inline-flex;align-items:center;gap:5px;padding:4px 11px;border-radius:100px;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase}
-.badge-active{background:rgba(34,197,94,.1);color:#4ade80;border:1px solid rgba(34,197,94,.25)}
-.badge-active::before{content:'';width:5px;height:5px;border-radius:50%;background:#4ade80;box-shadow:0 0 6px #4ade80;animation:blink 2s ease-in-out infinite}
-.badge-gray{background:rgba(255,255,255,.06);color:var(--muted);border:1px solid var(--border)}
-@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+  .telephone { position: relative; justify-self: center; width: min(300px, 100%); aspect-ratio: 1170 / 2532; border-radius: 46px; padding: 10px; background: linear-gradient(160deg, #2A2450, #0B0A1A); box-shadow: 0 0 0 1px rgba(255,255,255,.12), 0 50px 120px rgba(0,0,0,.65), 0 0 90px rgba(107,60,240,.35); transform: rotate(4deg); }
+  .telephone img { width: 100%; height: 100%; object-fit: cover; object-position: top; border-radius: 37px; }
+  .puce { position: absolute; display: flex; align-items: center; gap: 8px; padding: 10px 14px; border-radius: 14px; background: rgba(13, 14, 34, .86); border: 1px solid var(--trait); backdrop-filter: blur(8px); font-size: 13px; font-weight: 700; white-space: nowrap; box-shadow: 0 16px 40px rgba(0,0,0,.4); }
+  .puce b { color: var(--vert); }
+  .puce.p1 { left: -70px; top: 18%; animation: flotte 6s ease-in-out infinite; }
+  .puce.p2 { right: -54px; bottom: 22%; animation: flotte 7s ease-in-out infinite reverse; }
+  @keyframes flotte { 50% { transform: translateY(-12px); } }
 
-/* ── BTN ─────────────────────────────────────────── */
-.btn{display:inline-flex;align-items:center;gap:8px;padding:12px 24px;border-radius:7px;font-family:'Montserrat',sans-serif;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;transition:all .2s;cursor:pointer;border:none;white-space:nowrap}
-.btn-primary{background:var(--red);color:#fff}
-.btn-primary:hover{background:var(--red2);box-shadow:0 4px 20px rgba(220,38,38,.35);transform:translateY(-1px)}
-.btn-ghost{background:transparent;color:var(--muted);border:1px solid var(--border)}
-.btn-ghost:hover{color:#fff;border-color:var(--border2)}
-.btn-wa{background:#25D366;color:#fff}
-.btn-wa:hover{background:#20ba5c;box-shadow:0 4px 16px rgba(37,211,102,.3);transform:translateY(-1px)}
-.btn-wa svg,.btn svg{width:15px;height:15px;flex-shrink:0}
+  /* ── Bandeau des pays ── */
+  .pays { border-block: 1px solid var(--trait); overflow: hidden; padding: 18px 0; background: var(--nuit-2); }
+  .defile { display: flex; gap: 46px; width: max-content; animation: defile 38s linear infinite; font-family: var(--titre); font-weight: 600; font-size: 19px; color: #B9B6D3; }
+  .defile span { display: flex; align-items: center; gap: 46px; }
+  .defile span::after { content: '✦'; color: var(--violet-clair); font-size: 13px; }
+  @keyframes defile { to { transform: translateX(-50%); } }
 
-/* ── NAVBAR ──────────────────────────────────────── */
-.nav{
-  position:fixed;top:0;left:0;right:0;z-index:200;
-  height:62px;
-  background:rgba(13,13,13,.88);
-  backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);
-  border-bottom:1px solid rgba(255,255,255,.055);
-}
-.nav__inner{
-  max-width:1200px;margin:0 auto;padding:0 32px;
-  height:100%;display:flex;align-items:center;justify-content:space-between;gap:24px;
-}
-/* Wordmark */
-.nav__logo{display:flex;align-items:center;gap:10px;text-decoration:none;flex-shrink:0}
-.nav__logo-icon{height:44px;width:auto;max-width:56px;object-fit:contain;flex-shrink:0;display:block;mix-blend-mode:screen;filter:invert(1) brightness(2)}
-.nav__logo-word{font-family:'Bebas Neue',sans-serif;font-size:21px;letter-spacing:.08em;color:#fff;line-height:1}
-.nav__logo-word em{font-style:normal;color:#fff}
-/* Links */
-.nav__links{display:flex;align-items:center;gap:2px}
-.nav__link{font-size:11.5px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);padding:8px 16px;border-radius:6px;transition:all .2s;position:relative;white-space:nowrap}
-.nav__link:hover{color:#fff;background:rgba(255,255,255,.04)}
-/* Dropdown */
-.nav__dd{position:relative;display:inline-flex;align-items:center}
-.nav__dd-menu{position:absolute;top:calc(100% + 10px);left:0;background:#1a1a1a;border:1px solid var(--border);border-radius:10px;padding:6px;min-width:210px;display:flex;flex-direction:column;gap:2px;box-shadow:0 20px 50px rgba(0,0,0,.6);visibility:hidden;opacity:0;pointer-events:none;transition:opacity .15s .25s,visibility .15s .25s}
-.nav__dd-menu::before{content:'';position:absolute;bottom:100%;left:0;right:0;height:14px}
-.nav__dd:hover .nav__dd-menu{visibility:visible;opacity:1;pointer-events:auto;transition:opacity .1s,visibility .1s}
-.nav__dd-item{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:7px;font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);transition:all .15s}
-.nav__dd-item:hover{background:rgba(255,255,255,.045);color:#fff}
-.nav__dd-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
-/* Mobile */
-.nav__burger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:4px}
-.nav__burger span{display:block;width:22px;height:1.5px;background:#fff;border-radius:2px;transition:all .28s}
-.nav__burger.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg)}
-.nav__burger.open span:nth-child(2){opacity:0}
-.nav__burger.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg)}
-.nav__mobile{display:none;position:fixed;top:62px;left:0;right:0;background:rgba(13,13,13,.98);backdrop-filter:blur(24px);border-bottom:1px solid var(--border);padding:16px 32px 24px;flex-direction:column;gap:2px;z-index:199}
-.nav__mobile.open{display:flex}
-.nav__mobile a{font-size:13px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);padding:13px 0;border-bottom:1px solid var(--border);transition:color .2s}
-.nav__mobile a:hover{color:#fff}
-.nav__mobile a:last-child{border-bottom:none}
+  /* ── Sections ── */
+  section.bloc { padding: 140px 0; position: relative; }
+  .etiquette { font-size: 13px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--violet-clair); }
+  h2 { font-family: var(--titre); font-weight: 700; font-size: clamp(38px, 5.2vw, 70px); line-height: 1.02; letter-spacing: -0.04em; margin: 16px 0 22px; text-wrap: balance; }
+  h2 em { font-style: normal; color: var(--violet-clair); }
+  .intro { font-size: 19px; color: #C9C7DC; max-width: 620px; }
 
-/* ── HERO ────────────────────────────────────────── */
-.hero{
-  position:relative;
-  display:flex;flex-direction:column;justify-content:center;
-  padding:118px 0 40px;
-  overflow:hidden;
-}
-/* Background image */
-.hero__bg{position:absolute;inset:0;background:url('hero-banner.png') center/cover no-repeat;opacity:.82;z-index:0}
-/* Overlays */
-.hero__overlay{position:absolute;inset:0;z-index:1;background:linear-gradient(to right,rgba(13,13,13,.82) 0%,rgba(13,13,13,.25) 50%,rgba(13,13,13,.55) 100%)}
-.hero__glow{position:absolute;top:-10%;right:5%;width:680px;height:780px;background:radial-gradient(ellipse at center,var(--red-glow) 0%,transparent 68%);pointer-events:none;z-index:1;animation:glowPulse 5s ease-in-out infinite}
-@keyframes glowPulse{0%,100%{opacity:.7;transform:scale(1)}50%{opacity:1;transform:scale(1.06)}}
-/* Content */
-.hero__content{position:relative;z-index:2;width:100%;max-width:1200px;margin:0 auto;padding:0 32px;text-align:center;display:flex;flex-direction:column;align-items:center}
-.hero__pill{
-  display:inline-flex;align-items:center;gap:8px;margin-bottom:28px;
-  background:rgba(220,38,38,.08);border:1px solid rgba(220,38,38,.18);
-  border-radius:100px;padding:7px 16px;
-  font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#f87171;
-}
-.hero__pill-dot{width:6px;height:6px;border-radius:50%;background:var(--red);box-shadow:0 0 8px var(--red);animation:blink 2s ease-in-out infinite;flex-shrink:0}
-.hero__title{
-  font-family:'Bebas Neue',sans-serif;
-  font-size:clamp(64px,10.5vw,132px);
-  line-height:.9;letter-spacing:.025em;
-  margin-bottom:28px;
-  text-align:center;
-}
-.hero__title .line-white{color:#fff;display:block}
-.hero__title .line-red{color:var(--red);display:block}
-.hero__sub{
-  font-size:15px;font-weight:400;color:rgba(255,255,255,.55);
-  line-height:1.75;max-width:520px;margin:0 auto 40px;
-}
+  .produit { display: grid; grid-template-columns: 0.8fr 1.2fr; gap: 70px; align-items: center; margin-top: 70px; }
+  .produit .telephone { transform: rotate(-3deg); }
+  .atouts { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+  .atout { padding: 26px 24px; border-radius: 22px; background: var(--carte); border: 1px solid var(--trait); transition: border-color .3s, transform .3s; }
+  .atout:hover { border-color: rgba(156, 123, 255, .5); transform: translateY(-3px); }
+  .atout svg { width: 30px; height: 30px; color: var(--vert); }
+  .atout h3 { font-family: var(--titre); font-size: 20px; letter-spacing: -0.02em; margin: 16px 0 6px; }
+  .atout p { font-size: 15px; color: var(--doux); }
 
-/* Stats bar */
-.stats-bar{
-  display:inline-grid;grid-template-columns:repeat(3,auto);
-  border:1px solid var(--border);border-radius:var(--r);overflow:hidden;
-  background:rgba(255,255,255,.025);
-}
-.stats-bar__item{padding:20px 40px;text-align:center;position:relative}
-.stats-bar__item+.stats-bar__item::before{content:'';position:absolute;left:0;top:20%;bottom:20%;width:1px;background:var(--border)}
-.stats-bar__val{font-family:'Bebas Neue',sans-serif;font-size:44px;letter-spacing:.03em;color:#fff;line-height:1;display:block}
-.stats-bar__lbl{font-size:10.5px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-top:5px;display:block}
+  /* ── Chiffres ── */
+  .chiffres { display: grid; grid-template-columns: repeat(4, 1fr); gap: 22px; margin-top: 64px; }
+  .rond { aspect-ratio: 1; border-radius: 50%; border: 1px solid rgba(156, 123, 255, .35); display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 20px; background: radial-gradient(circle at 50% 30%, rgba(107,60,240,.16), transparent 65%); }
+  .rond strong { font-family: var(--titre); font-weight: 700; font-size: clamp(40px, 5vw, 66px); line-height: 1; letter-spacing: -0.04em; }
+  .rond strong span { background: linear-gradient(120deg, var(--violet-clair), var(--violet)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .rond small { margin-top: 10px; font-size: 13px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #CFCDE2; max-width: 160px; line-height: 1.4; }
+  .source { margin-top: 26px; font-size: 13px; color: var(--doux); }
 
-/* ── TICKER ──────────────────────────────────────── */
-.ticker-section{
-  background:var(--surface);
-  border-top:1px solid var(--border);border-bottom:1px solid var(--border);
-  padding:16px 0;display:flex;align-items:center;
-}
-.ticker-label{
-  flex-shrink:0;padding:0 28px 0 32px;
-  font-size:10px;font-weight:800;letter-spacing:.22em;text-transform:uppercase;
-  color:var(--red);white-space:nowrap;
-  border-right:1px solid var(--border);margin-right:0;
-}
-.ticker-overflow{flex:1;overflow:hidden;position:relative}
-.ticker-overflow::after{
-  content:'';position:absolute;top:0;right:0;bottom:0;width:80px;
-  background:linear-gradient(to left,var(--surface),transparent);pointer-events:none;z-index:2;
-}
-.ticker-track{display:flex;width:max-content;animation:ticker 28s linear infinite;align-items:center}
-.ticker-track:hover{animation-play-state:paused}
-@keyframes ticker{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
-.ticker-item{
-  display:inline-flex;align-items:center;gap:10px;padding:0 36px;
-  font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
-  color:rgba(255,255,255,.65);white-space:nowrap;transition:color .2s;
-}
-.ticker-item:hover{color:#fff}
-.ticker-dot{color:var(--red);margin:0 -20px;font-size:8px}
-.ticker-logo{height:26px;width:auto;object-fit:contain;opacity:.65;filter:brightness(0) invert(1);transition:all .2s;max-width:90px}
-.ticker-item:hover .ticker-logo{opacity:1}
+  /* ── Annonceurs ── */
+  .annonceurs { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+  .vitrine { border-radius: 28px; overflow: hidden; border: 1px solid var(--trait); box-shadow: 0 40px 100px rgba(0,0,0,.5); background: #ECEAF6; }
+  .emplacements { list-style: none; margin-top: 30px; display: grid; gap: 2px; }
+  .emplacements li { display: flex; justify-content: space-between; gap: 20px; padding: 16px 0; border-bottom: 1px solid var(--trait); font-size: 16px; }
+  .emplacements li span:last-child { color: var(--doux); text-align: right; }
+  .modeles { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 28px; }
+  .modeles span { padding: 8px 16px; border-radius: 999px; background: rgba(43, 255, 158, .1); color: var(--vert); font-size: 14px; font-weight: 700; }
 
-/* ── NETWORK SECTION ─────────────────────────────── */
-.network-section{padding:36px 0 80px;background:var(--bg)}
-.network-head{margin-bottom:28px}
-.network-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(36px,5.5vw,64px);letter-spacing:.04em;line-height:.95;color:#fff}
-.network-title span{color:var(--red)}
+  /* ── Engagement ── */
+  .engagement { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 56px; }
+  .engagement div { padding: 28px; border-radius: 22px; border: 1px solid var(--trait); background: linear-gradient(170deg, rgba(255,255,255,.05), transparent); }
+  .engagement b { display: block; font-family: var(--titre); font-size: 22px; letter-spacing: -0.02em; margin-bottom: 8px; }
+  .engagement p { color: var(--doux); font-size: 15px; }
 
-/* Brand cards grid */
-.brands-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:16px;overflow:hidden}
+  /* ── Contact ── */
+  .contact { text-align: center; padding: 160px 0; position: relative; overflow: hidden; }
+  .contact::before { content: ''; position: absolute; left: 50%; top: 50%; width: 1100px; height: 600px; transform: translate(-50%, -50%); background: radial-gradient(closest-side, rgba(107,60,240,.35), transparent 70%); pointer-events: none; }
+  .contact h2 { font-size: clamp(56px, 9vw, 128px); position: relative; }
+  .contact .actions { justify-content: center; position: relative; }
 
-/* Brand card */
-.brand-card{background:var(--card);display:flex;flex-direction:column;transition:background .25s}
-.brand-card:hover{background:#202020}
+  footer { border-top: 1px solid var(--trait); padding: 36px 0 44px; color: var(--doux); font-size: 14px; }
+  footer .enveloppe { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 14px; }
 
-.brand-card__top{display:flex;align-items:center;gap:11px;padding:18px 20px}
-.brand-card__icon{
-  width:44px;height:44px;border-radius:10px;
-  display:flex;align-items:center;justify-content:center;
-  flex-shrink:0;border:1px solid;overflow:hidden;padding:0;
-}
-.brand-card__icon img{width:100%;height:100%;object-fit:cover;display:block}
-.brand-card__icon--red{background:#0d0606;border-color:rgba(220,38,38,.2)}
-.brand-card__icon--purple{background:#020b1e;border-color:rgba(29,78,216,.25)}
-.brand-card__icon--orange{background:#0f0702;border-color:rgba(249,115,22,.2)}
-.brand-card__name-wrap{flex:1;min-width:0}
-.brand-card__name{font-family:'Bebas Neue',sans-serif;font-size:19px;letter-spacing:.06em;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.brand-card__sub{font-size:10px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);margin-top:2px}
+  /* ── Apparitions ── */
+  .apparait { opacity: 0; transform: translateY(34px); transition: opacity .9s cubic-bezier(.2,.7,.2,1), transform .9s cubic-bezier(.2,.7,.2,1); }
+  .apparait.vu { opacity: 1; transform: none; }
+  .sans-js .apparait { opacity: 1; transform: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .apparait { opacity: 1; transform: none; transition: none; }
+    .defile, .puce, .surtitre::before { animation: none; }
+  }
 
-/* Card image */
-.brand-card__img{height:200px;position:relative;overflow:hidden}
-.brand-card__img-bg{position:absolute;inset:0;background-size:cover;background-position:center;transition:transform .5s ease}
-.brand-card:hover .brand-card__img-bg{transform:scale(1.04)}
-.brand-card__img-overlay{position:absolute;inset:0}
-.ov-red{background:linear-gradient(to top,var(--card) 0%,rgba(13,0,0,.3) 60%,transparent 100%)}
-.ov-purple{background:linear-gradient(to top,var(--card) 0%,rgba(0,6,30,.3) 60%,transparent 100%)}
-.ov-orange{background:linear-gradient(to top,var(--card) 0%,rgba(14,5,0,.3) 60%,transparent 100%)}
-
-/* Card stats row */
-.brand-card__stats{display:grid;grid-template-columns:1fr 1fr;border-top:1px solid var(--border)}
-.brand-stat{padding:14px 12px;text-align:center;position:relative}
-.brand-stat+.brand-stat::before{content:'';position:absolute;left:0;top:15%;bottom:15%;width:1px;background:var(--border)}
-.brand-stat__val{font-family:'Bebas Neue',sans-serif;font-size:26px;letter-spacing:.04em;color:#fff;line-height:1;display:block}
-.brand-stat__lbl{font-size:9.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);margin-top:3px;display:block}
-
-/* Deal tags row */
-.brand-card__tags{display:flex;gap:5px;flex-wrap:wrap;padding:10px 20px 14px;border-top:1px solid var(--border)}
-.tag{font-size:9.5px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;padding:3px 9px;border-radius:4px;border:1px solid}
-.tag-red{background:rgba(220,38,38,.08);border-color:rgba(220,38,38,.22);color:#f87171}
-.tag-purple{background:rgba(29,78,216,.08);border-color:rgba(29,78,216,.22);color:#93c5fd}
-.tag-orange{background:rgba(249,115,22,.08);border-color:rgba(249,115,22,.22);color:#fb923c}
-
-/* CTA button */
-.brand-card__cta{
-  display:flex;align-items:center;justify-content:space-between;
-  padding:17px 20px;border-top:1px solid rgba(255,255,255,.12);
-  font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
-  color:#fff;background:rgba(255,255,255,.08);
-  transition:all .22s;cursor:pointer;margin-top:auto;
-}
-.brand-card__cta:hover{color:#fff;background:rgba(255,255,255,.16);letter-spacing:.14em;border-top-color:rgba(255,255,255,.22)}
-.brand-card__cta svg{width:15px;height:15px;flex-shrink:0;transition:transform .22s}
-.brand-card__cta:hover svg{transform:translate(3px,-3px)}
-
-/* ── BOTTOM SECTION (Markets + Compliance) ────────── */
-.bottom-section{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);border-top:1px solid var(--border)}
-
-/* Markets */
-.markets-panel{background:var(--surface);padding:72px 48px}
-.panel-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(32px,4vw,52px);letter-spacing:.04em;color:#fff;line-height:.95;margin-bottom:32px}
-.panel-title span{color:var(--red)}
-
-/* World map */
-.world-map{position:relative;border:1px solid var(--border);border-radius:12px;overflow:hidden;background:#111;height:280px}
-.world-map svg{width:100%;height:100%;display:block}
-.map-marker{cursor:default;transition:all .2s}
-.map-marker:hover .map-pulse-ring{opacity:1}
-.map-marker-tooltip{
-  position:absolute;transform:translate(-50%,-130%);
-  background:rgba(22,22,22,.96);border:1px solid var(--border2);border-radius:8px;
-  padding:7px 12px;white-space:nowrap;pointer-events:none;
-  font-size:11px;font-weight:600;letter-spacing:.06em;color:#fff;
-  opacity:0;transition:opacity .2s;z-index:10;
-}
-.market-chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px}
-.market-chip{display:flex;align-items:center;gap:6px;background:var(--card);border:1px solid var(--border);border-radius:7px;padding:7px 12px;font-size:11px;font-weight:600;color:rgba(255,255,255,.65);transition:all .2s}
-.market-chip:hover{border-color:var(--green);color:#fff}
-.market-chip-dot{width:6px;height:6px;border-radius:50%;background:var(--green);box-shadow:0 0 5px var(--green);animation:blink 2s ease-in-out infinite;flex-shrink:0}
-
-/* Compliance */
-.compliance-panel{background:var(--surface);padding:72px 48px}
-.comp-list{display:flex;flex-direction:column;gap:0;margin-top:8px}
-.comp-item{display:flex;align-items:flex-start;gap:16px;padding:24px 0;border-bottom:1px solid var(--border)}
-.comp-item:first-child{border-top:1px solid var(--border)}
-.comp-check{
-  width:28px;height:28px;border-radius:50%;
-  background:rgba(34,197,94,.08);border:1px solid rgba(34,197,94,.2);
-  display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;
-}
-.comp-check svg{width:13px;height:13px;stroke:var(--green);fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
-.comp-text{font-size:13.5px;color:rgba(255,255,255,.65);line-height:1.75}
-.comp-text strong{color:#fff;font-weight:700}
-
-/* ── FAQ ─────────────────────────────────────────── */
-.faq-section{padding:96px 0;background:var(--bg);border-top:1px solid var(--border)}
-.faq-head{display:flex;align-items:flex-start;gap:22px;margin-bottom:56px}
-.faq-icon-wrap{
-  width:54px;height:54px;border-radius:14px;flex-shrink:0;
-  background:rgba(220,38,38,.07);border:1px solid rgba(220,38,38,.16);
-  display:flex;align-items:center;justify-content:center;margin-top:6px;
-}
-.faq-icon-wrap svg{width:24px;height:24px;stroke:var(--red);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
-.faq-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(52px,7vw,80px);line-height:.9;letter-spacing:.04em;color:#fff}
-.faq-list{max-width:760px}
-.faq-item{border-bottom:1px solid var(--border)}
-.faq-item:first-child{border-top:1px solid var(--border)}
-.faq-q{
-  width:100%;background:none;border:none;cursor:pointer;
-  display:flex;align-items:center;justify-content:space-between;gap:16px;
-  padding:22px 0;
-  font-family:'Montserrat',sans-serif;font-size:14.5px;font-weight:700;color:#fff;text-align:left;
-  transition:color .2s;
-}
-.faq-q:hover{color:rgba(255,255,255,.75)}
-.faq-plus{
-  width:28px;height:28px;border-radius:50%;
-  background:rgba(255,255,255,.05);border:1px solid var(--border);
-  display:flex;align-items:center;justify-content:center;
-  font-size:18px;color:var(--muted);flex-shrink:0;
-  transition:all .25s;
-}
-.faq-item.open .faq-plus{background:var(--red);border-color:var(--red);color:#fff;transform:rotate(45deg)}
-.faq-answer{max-height:0;overflow:hidden;transition:max-height .35s ease}
-.faq-item.open .faq-answer{max-height:300px}
-.faq-answer-inner{padding:0 0 22px;font-size:14px;color:var(--muted);line-height:1.78}
-
-/* ── FOOTER ──────────────────────────────────────── */
-.footer{background:var(--surface);border-top:1px solid var(--border)}
-.footer__main{
-  max-width:1200px;margin:0 auto;padding:64px 32px 48px;
-  display:grid;grid-template-columns:2.2fr 1fr 1fr;gap:56px;
-}
-.footer__wordmark{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:.08em;margin-bottom:16px}
-.footer__wordmark em{font-style:normal;color:#fff}
-.footer__desc{font-size:13px;color:var(--muted);line-height:1.75;margin-bottom:20px;max-width:300px}
-.footer__legal{display:flex;align-items:flex-start;gap:8px;font-size:11px;color:var(--dim);line-height:1.55}
-.footer__18{background:var(--red);color:#fff;font-weight:800;font-size:10px;padding:2px 7px;border-radius:4px;flex-shrink:0;margin-top:1px}
-.footer__col-lbl{font-size:10px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:16px}
-.footer__links{display:flex;flex-direction:column;gap:10px}
-.footer__links a{font-size:13px;color:rgba(255,255,255,.38);transition:color .2s}
-.footer__links a:hover{color:#fff}
-.footer__contact-lbl{font-size:10px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-top:24px;margin-bottom:8px}
-.footer__email{font-size:12.5px;color:rgba(255,255,255,.4);display:block;transition:color .2s}
-.footer__email:hover{color:#fff}
-.footer__wa{
-  display:inline-flex;align-items:center;gap:8px;margin-top:12px;
-  background:#25D366;color:#fff;
-  font-size:11px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;
-  padding:10px 16px;border-radius:7px;transition:all .2s;
-}
-.footer__wa:hover{background:#20ba5c;transform:translateY(-1px)}
-.footer__wa svg{width:14px;height:14px}
-.footer__bottom{
-  max-width:1200px;margin:0 auto;padding:18px 32px;
-  border-top:1px solid var(--border);
-  display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;
-}
-.footer__bottom p{font-size:12px;color:var(--dim)}
-.footer__bottom-links{display:flex;align-items:center;gap:12px}
-.footer__bottom-links a{font-size:12px;color:var(--dim);transition:color .2s}
-.footer__bottom-links a:hover{color:#fff}
-.footer__bottom-links span{color:var(--border)}
-
-/* ── REVEAL ──────────────────────────────────────── */
-.reveal{opacity:0;transform:translateY(20px);transition:opacity .6s ease,transform .6s ease}
-.reveal.visible{opacity:1;transform:none}
-
-/* ── RESPONSIVE ──────────────────────────────────── */
-@media(max-width:1024px){
-  .brands-grid{grid-template-columns:1fr}
-  .bottom-section{grid-template-columns:1fr}
-  .footer__main{grid-template-columns:1fr 1fr;gap:32px}
-}
-@media(max-width:768px){
-  .nav__links,.nav__links+.btn-wa{display:none}
-  .nav__burger{display:flex}
-  .hero{padding:100px 0 32px}
-  .stats-bar{grid-template-columns:1fr;width:100%}
-  .stats-bar__item+.stats-bar__item::before{display:none}
-  .markets-panel,.compliance-panel{padding:48px 28px}
-  .faq-section{padding:64px 0}
-  .footer__main{grid-template-columns:1fr;gap:28px}
-  .footer__bottom{flex-direction:column;align-items:flex-start;gap:10px}
-}
-@media(max-width:480px){
-  .container{padding:0 20px}
-  .hero__content{padding:0 20px}
-  .hero__title{font-size:60px}
-}
+  @media (max-width: 900px) {
+    nav { display: none; }
+    .accroche .enveloppe, .produit, .annonceurs { grid-template-columns: 1fr; }
+    .accroche { padding-top: 110px; }
+    .telephone { width: min(250px, 70vw); }
+    .puce.p1 { left: -30px; } .puce.p2 { right: -26px; }
+    .atouts, .engagement { grid-template-columns: 1fr; }
+    .chiffres { grid-template-columns: 1fr 1fr; gap: 14px; }
+    section.bloc { padding: 96px 0; }
+  }
 </style>
 </head>
-<body>
+<body class="sans-js">
 
-<!-- ══ NAV ══════════════════════════════════════════ -->
-<nav class="nav">
-  <div class="nav__inner">
-
-    <a href="index.html" class="nav__logo">
-      <img src="skillart-group-logo.png" alt="Skillart Group" class="nav__logo-icon">
-      <span class="nav__logo-word">SKILLART <em>GROUP</em></span>
-    </a>
-
-    <div class="nav__links">
-      <div class="nav__dd">
-        <span class="nav__link" style="cursor:default">Brands ▾</span>
-        <div class="nav__dd-menu">
-          <a href="skillart.html" class="nav__dd-item"><span class="nav__dd-dot" style="background:#dc2626"></span>Skillart</a>
-          <a href="cercle-des-parieurs.html" class="nav__dd-item"><span class="nav__dd-dot" style="background:#1d4ed8"></span>Cercle des Parieurs</a>
-          <a href="spinova.html" class="nav__dd-item"><span class="nav__dd-dot" style="background:#f97316"></span>Spinova</a>
-        </div>
-      </div>
-      <a href="#markets" class="nav__link">Markets</a>
-      <a href="regulatory-compliance.html" class="nav__link">Compliance</a>
-    </div>
-
-    <!--
-      📱 WHATSAPP: remplace YOUR_NUMBER par ton numéro Business
-      Format: indicatif + numéro sans espaces (ex: 33612345678)
-    -->
-    <a href="https://wa.me/31626070053" target="_blank" rel="noopener" class="btn btn-wa" style="padding:10px 20px;font-size:11.5px">
-      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-      Partner with us
-    </a>
-
-    <button class="nav__burger" id="burger"><span></span><span></span><span></span></button>
+<header id="tete">
+  <div class="enveloppe barre">
+    <a class="logo" href="#"><i>S</i>SKILLART GROUP</a>
+    <nav>
+      <a href="#ninjascores">NinjaScores</a>
+      <a href="#annonceurs">Advertise</a>
+      <a href="#engagement">Responsibility</a>
+    </nav>
+    <a class="pilule" href="#contact">Contact us ↗</a>
   </div>
-</nav>
+</header>
 
-<!-- Mobile nav -->
-<div class="nav__mobile" id="mobileNav">
-  <a href="#brands">Brands</a>
-  <a href="skillart.html" style="padding-left:14px;font-size:11.5px;opacity:.7">→ Skillart</a>
-  <a href="cercle-des-parieurs.html" style="padding-left:14px;font-size:11.5px;opacity:.7">→ Cercle des Parieurs</a>
-  <a href="spinova.html" style="padding-left:14px;font-size:11.5px;opacity:.7">→ Spinova</a>
-  <a href="#markets">Markets</a>
-  <a href="regulatory-compliance.html">Compliance</a>
-  <a href="https://wa.me/31626070053" target="_blank" style="color:#4ade80;border-bottom:none">💬 WhatsApp Business</a>
+<section class="accroche">
+  <canvas id="champ" aria-hidden="true"></canvas>
+  <div class="halo"></div>
+  <div class="enveloppe">
+    <div>
+      <span class="surtitre apparait">Sports media &amp; technology</span>
+      <h1 class="apparait">Where match day <em>starts.</em></h1>
+      <p class="chapo apparait">Skillart Group builds NinjaScores, the app football fans open before every kick-off: live scores, odds and rated predictions, in their language.</p>
+      <div class="actions apparait">
+        <a class="pilule plein" href="#annonceurs">Partner with us</a>
+        <a class="pilule" href="#ninjascores">Discover NinjaScores</a>
+      </div>
+    </div>
+    <div class="telephone apparait">
+      <img src="img/ecran-accueil.jpg" alt="NinjaScores home screen with the match of the day">
+      <div class="puce p1"><b>●</b> Live scores</div>
+      <div class="puce p2">Rated <b>8/10</b> predictions</div>
+    </div>
+  </div>
+</section>
+
+<div class="pays" aria-label="Markets">
+  <div class="defile">
+    <span>Côte d’Ivoire</span><span>Burkina Faso</span><span>Benin</span><span>Togo</span><span>Cameroon</span><span>Senegal</span><span>DR Congo</span><span>Mali</span><span>France</span><span>Kenya</span><span>Nigeria</span>
+    <span>Côte d’Ivoire</span><span>Burkina Faso</span><span>Benin</span><span>Togo</span><span>Cameroon</span><span>Senegal</span><span>DR Congo</span><span>Mali</span><span>France</span><span>Kenya</span><span>Nigeria</span>
+  </div>
 </div>
 
-<!-- ══ HERO ══════════════════════════════════════════ -->
-<section class="hero" id="home">
-  <div class="hero__bg"></div>
-  <div class="hero__overlay"></div>
-  <div class="hero__glow"></div>
-
-  <div class="hero__content">
-    <h1 class="hero__title">
-      <span class="line-white">WE RUN SPORT</span>
-      <span class="line-white">MEDIA BRANDS</span>
-      <span class="line-white">ACROSS THE GLOBE</span>
-    </h1>
-
-    <div class="stats-bar">
-      <div class="stats-bar__item">
-        <span class="stats-bar__val" data-count="50" data-suffix="K">0</span>
-        <span class="stats-bar__lbl">Followers</span>
-      </div>
-      <div class="stats-bar__item">
-        <span class="stats-bar__val" data-count="3" data-suffix="">0</span>
-        <span class="stats-bar__lbl">Brands</span>
-      </div>
-      <div class="stats-bar__item">
-        <span class="stats-bar__val" data-count="6" data-suffix="">0</span>
-        <span class="stats-bar__lbl">Active Markets</span>
+<section class="bloc" id="ninjascores">
+  <div class="enveloppe">
+    <span class="etiquette apparait">The platform</span>
+    <h2 class="apparait">One app. <em>Every match that matters.</em></h2>
+    <p class="intro apparait">NinjaScores turns match data into decisions. Fans check the score, read the stats, compare the odds and pick their bet, all in one place.</p>
+    <div class="produit">
+      <div class="telephone apparait"><img src="img/ecran-pronostics.jpg" alt="NinjaScores predictions tab"></div>
+      <div class="atouts">
+        <div class="atout apparait">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+          <h3>Live scores &amp; alerts</h3>
+          <p>Goals, half-time and full-time pushed in real time for favourite teams and players.</p>
+        </div>
+        <div class="atout apparait">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 19V9M10 19V5M16 19v-7M22 19H2"/></svg>
+          <h3>Rated predictions</h3>
+          <p>Every pick scored out of 10 from the last ten matches of both teams. Data, not hunches.</p>
+        </div>
+        <div class="atout apparait">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="M3 10h18M8 15h3"/></svg>
+          <h3>Odds next to the stats</h3>
+          <p>Pre-match odds and boosted odds shown beside the data, at the moment the bet is decided.</p>
+        </div>
+        <div class="atout apparait">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M21 4 3 11l7 2 2 7 3-5 5 4z"/></svg>
+          <h3>Community every day</h3>
+          <p>Daily picks on Telegram and live shows on TikTok bring fans back before each match.</p>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ══ TICKER ════════════════════════════════════════ -->
-<div class="ticker-section">
-  <div class="ticker-label">Trusted by</div>
-  <div class="ticker-overflow">
-    <div class="ticker-track">
-      <span class="ticker-item">1WIN</span><span class="ticker-dot">●</span>
-      <span class="ticker-item">MyStake</span><span class="ticker-dot">●</span>
-      <span class="ticker-item">SGcasino</span><span class="ticker-dot">●</span>
-      <span class="ticker-item">LollyBet</span><span class="ticker-dot">●</span>
-      <span class="ticker-item">WinWin Bet</span><span class="ticker-dot">●</span>
-      <!-- duplicate for seamless loop -->
-      <span class="ticker-item">1WIN</span><span class="ticker-dot">●</span>
-      <span class="ticker-item">MyStake</span><span class="ticker-dot">●</span>
-      <span class="ticker-item">SGcasino</span><span class="ticker-dot">●</span>
-      <span class="ticker-item">LollyBet</span><span class="ticker-dot">●</span>
-      <span class="ticker-item">WinWin Bet</span><span class="ticker-dot">●</span>
+<section class="bloc" style="padding-top: 40px;">
+  <div class="enveloppe">
+    <span class="etiquette apparait">In numbers</span>
+    <h2 class="apparait">Launched in September. <em>Growing every week.</em></h2>
+    <div class="chiffres">
+      <div class="rond apparait"><strong class="chiffre"><span data-vers="11">11</span>k+</strong><small>Monthly active users</small></div>
+      <div class="rond apparait"><strong class="chiffre"><span data-vers="2000" data-sep="1">2,000</span></strong><small>Daily active users</small></div>
+      <div class="rond apparait"><strong class="chiffre"><span data-vers="15">15</span>k+</strong><small>Monthly clicks to partners</small></div>
+      <div class="rond apparait"><strong class="chiffre"><span>4.3</span></strong><small>Google Play rating</small></div>
     </div>
+    <p class="source apparait">Internal data, last 30 days, October 2026. Android, iPhone and web.</p>
   </div>
-</div>
+</section>
 
-<!-- ══ OUR FLAGSHIP NETWORK ══════════════════════════ -->
-<section class="network-section" id="brands">
-  <div class="container">
-    <div class="network-head reveal">
-      <div class="section-eyebrow">Our Portfolio</div>
-      <h2 class="network-title" style="color:#fff">Our Brands</h2>
+<section class="bloc" id="annonceurs">
+  <div class="enveloppe annonceurs">
+    <div>
+      <span class="etiquette apparait">Advertise</span>
+      <h2 class="apparait">Put your brand <em>where the bet is decided.</em></h2>
+      <p class="intro apparait">Your offer sits next to the odds and the predictions, seen by fans who are about to bet, not by a casual audience.</p>
+      <ul class="emplacements apparait">
+        <li><span>Home screen banner</span><span>First screen at every opening</span></li>
+        <li><span>Odds tab</span><span>On every match page</span></li>
+        <li><span>“Bet now” on predictions</span><span>Under each daily pick</span></li>
+        <li><span>Daily bonus page</span><span>Your welcome offer, front and centre</span></li>
+        <li><span>Telegram &amp; TikTok</span><span>Mentions in daily picks and live shows</span></li>
+      </ul>
+      <div class="modeles apparait"><span>CPA</span><span>Hybrid</span><span>Fixed-fee sponsorship</span></div>
     </div>
+    <div class="vitrine apparait"><img src="img/emplacement-accueil.jpg" alt="Example of a partner banner on the NinjaScores home screen"></div>
+  </div>
+</section>
 
-    <div class="brands-grid">
-
-      <!-- ─ SKILLART ─ -->
-      <div class="brand-card reveal">
-        <div class="brand-card__top">
-          <div class="brand-card__icon brand-card__icon--red"><img src="skillart-logo.png" alt="Skillart" style="object-position:center 8%"></div>
-          <div class="brand-card__name-wrap">
-            <div class="brand-card__name">SKILLART</div>
-            <div class="brand-card__sub">Sports Media</div>
-          </div>
-          <span class="badge badge-active">Active</span>
-        </div>
-
-        <div class="brand-card__img">
-          <div class="brand-card__img-bg" style="background-image:url('skillart-banner.jpg');background-size:cover;background-position:center center"></div>
-          <div class="brand-card__img-overlay ov-red"></div>
-        </div>
-
-        <div class="brand-card__stats">
-          <div class="brand-stat">
-            <span class="brand-stat__val">30K</span>
-            <span class="brand-stat__lbl">Followers</span>
-          </div>
-          <div class="brand-stat">
-            <span class="brand-stat__val">6</span>
-            <span class="brand-stat__lbl">GEOs</span>
-          </div>
-        </div>
-
-        <div class="brand-card__tags">
-          <span class="tag tag-red">CPA</span>
-          <span class="tag tag-red">RevShare</span>
-          <span class="tag tag-red">Hybrid</span>
-          <span class="tag tag-red">🇫🇷 🇨🇮 🇨🇦 🇧🇪 🇨🇲 🇸🇳</span>
-        </div>
-
-        <a href="skillart.html" class="brand-card__cta">
-          View Details
-          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M7 17L17 7M17 7H7M17 7v10"/></svg>
-        </a>
-      </div>
-
-      <!-- ─ CERCLE DES PARIEURS ─ -->
-      <div class="brand-card reveal" style="transition-delay:.08s">
-        <div class="brand-card__top">
-          <div class="brand-card__icon brand-card__icon--purple"><img src="cdp-logo.png" alt="Cercle des Parieurs"></div>
-          <div class="brand-card__name-wrap">
-            <div class="brand-card__name" style="font-size:15px">CERCLE DES PARIEURS</div>
-            <div class="brand-card__sub">Sports Media</div>
-          </div>
-          <span class="badge badge-active">Active</span>
-        </div>
-
-        <div class="brand-card__img">
-          <div class="brand-card__img-bg" style="background-image:url('cdp-banner.png');background-size:cover;background-position:center center"></div>
-          <div class="brand-card__img-overlay ov-purple"></div>
-        </div>
-
-        <div class="brand-card__stats">
-          <div class="brand-stat">
-            <span class="brand-stat__val">20K</span>
-            <span class="brand-stat__lbl">Followers</span>
-          </div>
-          <div class="brand-stat">
-            <span class="brand-stat__val">6</span>
-            <span class="brand-stat__lbl">GEOs</span>
-          </div>
-        </div>
-
-        <div class="brand-card__tags">
-          <span class="tag tag-purple">CPA</span>
-          <span class="tag tag-purple">RevShare</span>
-          <span class="tag tag-purple">Hybrid</span>
-          <span class="tag tag-purple">🇫🇷 🇨🇮 🇨🇦 🇧🇪 🇨🇲 🇸🇳</span>
-        </div>
-
-        <a href="cercle-des-parieurs.html" class="brand-card__cta">
-          View Details
-          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M7 17L17 7M17 7H7M17 7v10"/></svg>
-        </a>
-      </div>
-
-      <!-- ─ SPINOVA ─ -->
-      <div class="brand-card reveal" style="transition-delay:.16s">
-        <div class="brand-card__top">
-          <div class="brand-card__icon brand-card__icon--orange"><img src="spinova-logo.png" alt="Spinova"></div>
-          <div class="brand-card__name-wrap">
-            <div class="brand-card__name">SPINOVA</div>
-            <div class="brand-card__sub">iGaming Media</div>
-          </div>
-          <span class="badge badge-active">Active</span>
-        </div>
-
-        <div class="brand-card__img">
-          <div class="brand-card__img-bg" style="background-image:url('spinova-banner.png');background-size:cover;background-position:center center"></div>
-          <div class="brand-card__img-overlay ov-orange"></div>
-        </div>
-
-        <div class="brand-card__stats">
-          <div class="brand-stat">
-            <span class="brand-stat__val">&lt;10K</span>
-            <span class="brand-stat__lbl">Followers</span>
-          </div>
-          <div class="brand-stat">
-            <span class="brand-stat__val">6</span>
-            <span class="brand-stat__lbl">GEOs</span>
-          </div>
-        </div>
-
-        <div class="brand-card__tags">
-          <span class="tag tag-orange">CPA</span>
-          <span class="tag tag-orange">RevShare</span>
-          <span class="tag tag-orange">Hybrid</span>
-          <span class="tag tag-orange">🇫🇷 🇨🇮 🇨🇦 🇧🇪 🇨🇲 🇸🇳</span>
-        </div>
-
-        <a href="spinova.html" class="brand-card__cta">
-          View Details
-          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M7 17L17 7M17 7H7M17 7v10"/></svg>
-        </a>
-      </div>
-
+<section class="bloc" id="engagement" style="padding-top: 40px;">
+  <div class="enveloppe">
+    <span class="etiquette apparait">Responsibility</span>
+    <h2 class="apparait">Built for adults. <em>Played responsibly.</em></h2>
+    <div class="engagement">
+      <div class="apparait"><b>18+ only</b><p>Betting content is never shown to minors. The iPhone app is rated 18+ on the App Store.</p></div>
+      <div class="apparait"><b>Local rules first</b><p>In regulated markets we only show locally licensed operators, such as ANJ-approved brands in France.</p></div>
+      <div class="apparait"><b>Safer gambling</b><p>Every partner placement carries the responsible gambling message required in the user’s market.</p></div>
     </div>
   </div>
 </section>
 
-<!-- ══ MARKETS + COMPLIANCE ══════════════════════════ -->
-<div class="bottom-section" id="markets">
-
-  <!-- Our Markets -->
-  <div class="markets-panel reveal">
-    <h2 class="panel-title" style="color:#fff">Our Markets</h2>
-
-    <style>
-      .mkt-table{width:100%;border-collapse:collapse;margin-top:8px}
-      .mkt-table tr{border-bottom:1px solid var(--border)}
-      .mkt-table tr:last-child{border-bottom:none}
-      .mkt-table td{padding:14px 0;vertical-align:middle}
-      .mkt-table .mkt-country{display:flex;align-items:center;gap:10px;font-size:14px;font-weight:700;color:#fff;white-space:nowrap}
-      .mkt-table .mkt-flag{font-size:20px;line-height:1}
-      .mkt-table .mkt-deals{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}
-      .mkt-deal{font-size:9.5px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;padding:4px 10px;border-radius:4px;border:1px solid}
-      .mkt-deal--green{background:rgba(34,197,94,.08);border-color:rgba(34,197,94,.22);color:#4ade80}
-      .mkt-deal--red{background:rgba(220,38,38,.08);border-color:rgba(220,38,38,.22);color:#f87171}
-    </style>
-
-    <table class="mkt-table">
-      <tr>
-        <td><div class="mkt-country"><span class="mkt-flag">🇫🇷</span>France</div></td>
-        <td class="mkt-deals">
-          <span class="mkt-deal mkt-deal--red">CPA</span>
-          <span class="mkt-deal mkt-deal--red">Hybrid</span>
-        </td>
-      </tr>
-      <tr>
-        <td><div class="mkt-country"><span class="mkt-flag">🇧🇪</span>Belgium</div></td>
-        <td class="mkt-deals">
-          <span class="mkt-deal mkt-deal--red">CPA</span>
-          <span class="mkt-deal mkt-deal--red">Hybrid</span>
-        </td>
-      </tr>
-      <tr>
-        <td><div class="mkt-country"><span class="mkt-flag">🇨🇦</span>Canada</div></td>
-        <td class="mkt-deals">
-          <span class="mkt-deal mkt-deal--red">CPA</span>
-          <span class="mkt-deal mkt-deal--red">Hybrid</span>
-        </td>
-      </tr>
-      <tr>
-        <td><div class="mkt-country"><span class="mkt-flag">🇨🇮</span>Côte d'Ivoire</div></td>
-        <td class="mkt-deals">
-          <span class="mkt-deal mkt-deal--green">RevShare</span>
-        </td>
-      </tr>
-      <tr>
-        <td><div class="mkt-country"><span class="mkt-flag">🇨🇲</span>Cameroun</div></td>
-        <td class="mkt-deals">
-          <span class="mkt-deal mkt-deal--green">RevShare</span>
-        </td>
-      </tr>
-      <tr>
-        <td><div class="mkt-country"><span class="mkt-flag">🇸🇳</span>Sénégal</div></td>
-        <td class="mkt-deals">
-          <span class="mkt-deal mkt-deal--green">RevShare</span>
-        </td>
-      </tr>
-    </table>
-  </div>
-
-  <!-- Compliance First -->
-  <div class="compliance-panel reveal" style="transition-delay:.12s">
-    <div class="section-eyebrow" style="color:#22c55e">Responsible Media</div>
-    <h2 class="panel-title" style="color:#fff">Compliance First</h2>
-
-    <div class="comp-list">
-      <div class="comp-item">
-        <div class="comp-check">
-          <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
-        </div>
-        <p class="comp-text">
-          <strong>Skillart Group is a digital media and performance marketing provider.</strong> We do not operate or provide gambling services directly. All partnerships are exclusively with fully licensed operators in each jurisdiction.
-        </p>
-      </div>
-      <div class="comp-item">
-        <div class="comp-check">
-          <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
-        </div>
-        <p class="comp-text">
-          <strong>All content and campaigns meet regulatory standards</strong> applicable in each market.
-        </p>
-      </div>
-      <div class="comp-item">
-        <div class="comp-check">
-          <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
-        </div>
-        <p class="comp-text">
-          <strong>We verify operator licensing before any partnership.</strong> No unlicensed operator promotion. Full GDPR compliance. Audience segmentation controls to ensure betting content is never served to minors or vulnerable groups.
-        </p>
-      </div>
+<section class="contact" id="contact">
+  <div class="enveloppe">
+    <span class="etiquette apparait">Let’s work together</span>
+    <h2 class="apparait">Let’s talk.</h2>
+    <div class="actions apparait">
+      <a class="pilule plein" href="mailto:jules@ninjascores.com">jules@ninjascores.com</a>
+      <a class="pilule" href="https://wa.me/31626070053" target="_blank" rel="noopener">WhatsApp ↗</a>
     </div>
-
-    <a href="https://wa.me/31626070053" target="_blank" class="btn btn-wa" style="margin-top:32px">
-      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-      Contact our legal department
-    </a>
-  </div>
-</div>
-
-<!-- ══ FAQ ════════════════════════════════════════════ -->
-<section class="faq-section" id="faq">
-  <div class="container" style="max-width:880px">
-
-    <div class="faq-head reveal">
-      <div class="faq-icon-wrap">
-        <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
-      </div>
-      <div>
-        <div class="section-eyebrow">Got questions?</div>
-        <div class="faq-title">FAQ</div>
-      </div>
-    </div>
-
-    <div class="faq-list">
-      <div class="faq-item open">
-        <button class="faq-q" onclick="toggleFaq(this)">What is Skillart Group?<span class="faq-plus">+</span></button>
-        <div class="faq-answer"><div class="faq-answer-inner">Skillart Group is a sports media organisation operating three brands (Skillart, Cercle des Parieurs, and Spinova) across 6 markets. We connect licensed operators with engaged, qualified audiences through performance-driven media partnerships. We are not a gambling operator.</div></div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q" onclick="toggleFaq(this)">What revenue models do you offer?<span class="faq-plus">+</span></button>
-        <div class="faq-answer"><div class="faq-answer-inner">It depends on the market. For African markets (Côte d'Ivoire, Cameroun, Sénégal) we work on a RevShare basis. For Tier 1 markets (France, Belgium, Canada) we offer CPA or Hybrid structures. All rates are negotiable and tailored to the operator's volume and objectives.</div></div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q" onclick="toggleFaq(this)">Which markets do you cover?<span class="faq-plus">+</span></button>
-        <div class="faq-answer"><div class="faq-answer-inner">We currently operate across 6 markets: France 🇫🇷, Belgium 🇧🇪, Canada 🇨🇦, Côte d'Ivoire 🇨🇮, Cameroun 🇨🇲 and Sénégal 🇸🇳. Our three brands have different focuses within these markets and together provide strong coverage across both European and West African audiences.</div></div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q" onclick="toggleFaq(this)">Can operators provide exclusive promotions?<span class="faq-plus">+</span></button>
-        <div class="faq-answer"><div class="faq-answer-inner">Yes. We regularly feature exclusive welcome offers and boosted odds for our operator partners. These exclusives perform well across our editorial content and social channels, and tend to generate stronger conversion rates than standard promotions.</div></div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q" onclick="toggleFaq(this)">How do I start a partnership?<span class="faq-plus">+</span></button>
-        <div class="faq-answer"><div class="faq-answer-inner">The simplest way is to message us directly on WhatsApp. We typically respond within 24 hours.</div></div>
-      </div>
-    </div>
-
   </div>
 </section>
 
-<!-- ══ FOOTER ═════════════════════════════════════════ -->
-<footer class="footer">
-  <div class="footer__main">
-    <div>
-      <div class="footer__wordmark">SKILLART <em>GROUP</em></div>
-      <p class="footer__desc">Skillart Group is a B2B sports media that runs brands. We do not organise, facilitate, or operate gambling activities in any form.</p>
-      <div class="footer__legal">
-        <span class="footer__18">18+</span>
-        All promoted services are for adults aged 18+ only. Gamble responsibly.
-        <a href="regulatory-compliance.html" style="color:inherit;text-decoration:underline;margin-left:4px">Learn more.</a>
-      </div>
-    </div>
-    <div>
-      <div class="footer__col-lbl">Brands</div>
-      <div class="footer__links">
-        <a href="skillart.html">Skillart</a>
-        <a href="cercle-des-parieurs.html">Cercle des Parieurs</a>
-        <a href="spinova.html">Spinova</a>
-      </div>
-    </div>
-    <div>
-      <div class="footer__col-lbl">Legal</div>
-      <div class="footer__links">
-        <a href="regulatory-compliance.html">Regulatory Compliance</a>
-        <a href="legal.html">CGU &amp; CGV</a>
-      </div>
-      <div class="footer__contact-lbl">B2B Partnerships</div>
-      <a href="https://wa.me/31626070053" target="_blank" rel="noopener" class="footer__wa">
-        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-        Wanna partner with us?
-      </a>
-    </div>
-  </div>
-  <div class="footer__bottom">
-    <p>© 2026 Skillart Group. All rights reserved.</p>
+<footer>
+  <div class="enveloppe">
+    <span>© 2026 Skillart Group LLC · 30 N Gould St Ste 100, Sheridan, WY 82801, USA</span>
+    <span>NinjaScores is a product of Skillart Group LLC</span>
   </div>
 </footer>
 
 <script>
-/* ── FAQ ── */
-function toggleFaq(btn){
-  const item=btn.closest('.faq-item'),wasOpen=item.classList.contains('open');
-  document.querySelectorAll('.faq-item').forEach(i=>i.classList.remove('open'));
-  if(!wasOpen)item.classList.add('open');
-}
+(function () {
+  document.body.classList.remove('sans-js');
+  var calme = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-/* ── Burger ── */
-const burger=document.getElementById('burger'),mobileNav=document.getElementById('mobileNav');
-burger.addEventListener('click',()=>{burger.classList.toggle('open');mobileNav.classList.toggle('open')});
-mobileNav.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{burger.classList.remove('open');mobileNav.classList.remove('open')}));
+  // En-tête opaque au défilement
+  var tete = document.getElementById('tete');
+  var colle = function () { tete.classList.toggle('colle', window.scrollY > 20); };
+  window.addEventListener('scroll', colle, { passive: true }); colle();
 
-/* ── Stat counters ── */
-function animateCounters(){
-  document.querySelectorAll('.stats-bar__val[data-count]').forEach(el=>{
-    const target=parseFloat(el.dataset.count),suffix=el.dataset.suffix||'',isFloat=String(target).includes('.');
-    const steps=108;let frame=0;
-    function ease(t){return 1-Math.pow(1-t,4)}
-    const iv=setInterval(()=>{
-      frame++;const p=Math.min(frame/steps,1),cur=target*ease(p);
-      el.textContent=(isFloat?cur.toFixed(1):Math.floor(cur))+suffix;
-      if(p>=1){el.textContent=(isFloat?target.toFixed(1):target)+suffix;clearInterval(iv)}
-    },1000/60);
+  // Apparitions et compteurs (les valeurs finales sont déjà dans le HTML)
+  var compter = function (el) {
+    var fin = Number(el.dataset.vers), sep = el.dataset.sep, t0 = null;
+    if (!fin || calme) return;
+    var pas = function (t) {
+      if (!t0) t0 = t;
+      var k = Math.min(1, (t - t0) / 1400), v = Math.round(fin * (1 - Math.pow(1 - k, 3)));
+      el.textContent = sep ? v.toLocaleString('en-US') : String(v);
+      if (k < 1) requestAnimationFrame(pas);
+    };
+    requestAnimationFrame(pas);
+  };
+  var obs = new IntersectionObserver(function (entrees) {
+    entrees.forEach(function (e) {
+      if (!e.isIntersecting) return;
+      e.target.classList.add('vu');
+      e.target.querySelectorAll('[data-vers]').forEach(compter);
+      obs.unobserve(e.target);
+    });
+  }, { threshold: 0.18 });
+  document.querySelectorAll('.apparait').forEach(function (el, i) {
+    el.style.transitionDelay = (i % 4) * 0.08 + 's';
+    obs.observe(el);
   });
-}
-const statsBar=document.querySelector('.stats-bar');
-if(statsBar){new IntersectionObserver(e=>{if(e[0].isIntersecting){animateCounters();e[0].target._obs?.disconnect()}},{threshold:.5}).observe(statsBar)}
 
-/* ── Scroll reveal ── */
-const ro=new IntersectionObserver(e=>{e.forEach(en=>{if(en.isIntersecting){en.target.classList.add('visible');ro.unobserve(en.target)}})},{threshold:.08,rootMargin:'0px 0px -16px 0px'});
-document.querySelectorAll('.reveal').forEach(el=>ro.observe(el));
-
-/* ── Smooth anchor ── */
-document.querySelectorAll('a[href^="#"]').forEach(a=>a.addEventListener('click',e=>{const t=document.querySelector(a.getAttribute('href'));if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth'})}}));
+  // Champ de points lumineux dans l'accroche
+  var c = document.getElementById('champ'), ctx = c.getContext('2d'), pts = [], w, h, r = window.devicePixelRatio || 1;
+  var taille = function () {
+    w = c.clientWidth; h = c.clientHeight; c.width = w * r; c.height = h * r; ctx.setTransform(r, 0, 0, r, 0, 0);
+    pts = Array.from({ length: Math.round(w * h / 9000) }, function () {
+      return { x: Math.random() * w, y: Math.random() * h, v: 0.15 + Math.random() * 0.35, a: Math.random() * Math.PI * 2 };
+    });
+  };
+  var dessin = function () {
+    ctx.clearRect(0, 0, w, h);
+    pts.forEach(function (p) {
+      p.a += 0.01; p.y -= calme ? 0 : p.v; if (p.y < -4) { p.y = h + 4; p.x = Math.random() * w; }
+      var lum = 0.25 + 0.35 * (0.5 + 0.5 * Math.sin(p.a));
+      ctx.fillStyle = 'rgba(156,123,255,' + lum.toFixed(2) + ')';
+      ctx.beginPath(); ctx.arc(p.x, p.y, 1.2, 0, Math.PI * 2); ctx.fill();
+    });
+    if (!calme) requestAnimationFrame(dessin);
+  };
+  window.addEventListener('resize', taille); taille(); dessin();
+})();
 </script>
 </body>
 </html>
