@@ -58,17 +58,32 @@
   .surtitre::before { content: ''; width: 8px; height: 8px; border-radius: 50%; background: var(--vert); box-shadow: 0 0 12px var(--vert); animation: pouls 2s infinite; }
   @keyframes pouls { 50% { opacity: .35; } }
   h1 { font-family: var(--titre); font-weight: 700; font-size: clamp(54px, 8.4vw, 118px); line-height: 0.98; letter-spacing: -0.045em; margin: 22px 0 28px; text-wrap: balance; }
-  h1 em { font-style: normal; background: linear-gradient(100deg, var(--violet-clair), #5B8CFF 60%, var(--vert)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  h1 em { font-style: normal; background: linear-gradient(100deg, var(--violet-clair), #5B8CFF 30%, var(--vert) 50%, #5B8CFF 70%, var(--violet-clair)); background-size: 200% 100%; -webkit-background-clip: text; background-clip: text; color: transparent; }
+  h1 .mot { display: inline-block; opacity: 0; transform: translateY(0.45em) rotate(2deg); animation: monte .9s cubic-bezier(.2,.7,.2,1) forwards; animation-delay: calc(var(--i) * 90ms + 120ms); }
+  h1 em.mot { padding-right: 0.06em; animation: monte .9s cubic-bezier(.2,.7,.2,1) forwards, reflet 7s linear infinite; animation-delay: calc(var(--i) * 90ms + 120ms), 1.6s; }
+  @keyframes monte { to { opacity: 1; transform: none; } }
+  @keyframes reflet { to { background-position: -200% 0; } }
   .chapo { font-size: 20px; color: #C9C7DC; max-width: 560px; }
   .actions { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 38px; }
 
   .telephone { position: relative; justify-self: center; width: min(300px, 100%); aspect-ratio: 1170 / 2532; border-radius: 46px; padding: 10px; background: linear-gradient(160deg, #2A2450, #0B0A1A); box-shadow: 0 0 0 1px rgba(255,255,255,.12), 0 50px 120px rgba(0,0,0,.65), 0 0 90px rgba(107,60,240,.35); transform: rotate(4deg); }
-  .telephone img { width: 100%; height: 100%; object-fit: cover; object-position: top; border-radius: 37px; }
+  .telephone img, .telephone video { display: block; width: 100%; height: 100%; object-fit: cover; object-position: top; border-radius: 37px; }
+  .scene-tel { justify-self: center; perspective: 1100px; width: min(300px, 100%); }
+  .accroche .telephone { width: 100%; transform: rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)) rotateZ(4deg); will-change: transform; }
+  .accroche .telephone::after { content: ''; position: absolute; inset: 10px; border-radius: 37px; pointer-events: none; background: radial-gradient(circle at var(--gx, 30%) var(--gy, 15%), rgba(255,255,255,.22), rgba(255,255,255,0) 42%); mix-blend-mode: screen; }
+  .couche { position: absolute; inset: 0; pointer-events: none; transform: translate3d(var(--px, 0px), var(--py, 0px), 0); }
   .puce { position: absolute; display: flex; align-items: center; gap: 8px; padding: 10px 14px; border-radius: 14px; background: rgba(13, 14, 34, .86); border: 1px solid var(--trait); backdrop-filter: blur(8px); font-size: 13px; font-weight: 700; white-space: nowrap; box-shadow: 0 16px 40px rgba(0,0,0,.4); }
   .puce b { color: var(--vert); }
   .puce.p1 { left: -70px; top: 18%; animation: flotte 6s ease-in-out infinite; }
   .puce.p2 { right: -54px; bottom: 22%; animation: flotte 7s ease-in-out infinite reverse; }
   @keyframes flotte { 50% { transform: translateY(-12px); } }
+
+  /* ── Halo qui suit la souris, lueur des cartes ── */
+  .projecteur { position: fixed; left: 0; top: 0; width: 640px; height: 640px; margin: -320px 0 0 -320px; border-radius: 50%; background: radial-gradient(closest-side, rgba(107, 60, 240, .17), transparent); pointer-events: none; z-index: 0; opacity: 0; transition: opacity .5s; transform: translate3d(var(--x, -999px), var(--y, -999px), 0); }
+  .projecteur.on { opacity: 1; }
+  .lueur { position: relative; }
+  .lueur::after { content: ''; position: absolute; inset: 0; border-radius: inherit; padding: 1px; pointer-events: none; background: radial-gradient(220px circle at var(--mx, 50%) var(--my, 50%), rgba(156, 123, 255, .9), transparent 65%); -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask-composite: exclude; opacity: 0; transition: opacity .35s; }
+  .lueur:hover::after { opacity: 1; }
 
   /* ── Bandeau des partenaires ── */
   .partenaires { border-block: 1px solid var(--trait); padding: 30px 0; background: var(--nuit-2); }
@@ -85,14 +100,20 @@
   h2 em { font-style: normal; color: var(--violet-clair); }
   .intro { font-size: 19px; color: #C9C7DC; max-width: 620px; }
 
-  .produit { display: grid; grid-template-columns: 0.8fr 1.2fr; gap: 70px; align-items: center; margin-top: 70px; }
-  .produit .telephone { transform: rotate(-3deg); }
-  .atouts { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
-  .atout { padding: 26px 24px; border-radius: 22px; background: var(--carte); border: 1px solid var(--trait); transition: border-color .3s, transform .3s; }
-  .atout:hover { border-color: rgba(156, 123, 255, .5); transform: translateY(-3px); }
-  .atout svg { width: 30px; height: 30px; color: var(--vert); }
-  .atout h3 { font-family: var(--titre); font-size: 20px; letter-spacing: -0.02em; margin: 16px 0 6px; }
-  .atout p { font-size: 15px; color: var(--doux); }
+  .recit { display: grid; grid-template-columns: 0.85fr 1.15fr; gap: 80px; margin-top: 30px; }
+  .recit-scene { position: sticky; top: calc(50vh - 310px); height: 620px; display: flex; align-items: center; justify-content: center; gap: 28px; }
+  .recit-tel { width: 286px; transform: rotate(-3deg); }
+  .recit-tel .ecran { position: absolute; top: 10px; left: 10px; width: calc(100% - 20px); height: calc(100% - 20px); opacity: 0; transform: translateY(26px) scale(.97); transition: opacity .55s ease, transform .7s cubic-bezier(.2,.7,.2,1); }
+  .recit-tel .ecran.actif { opacity: 1; transform: none; }
+  .recit-points { display: flex; flex-direction: column; gap: 10px; }
+  .recit-points span { width: 4px; height: 18px; border-radius: 4px; background: rgba(255,255,255,.18); transition: height .4s, background .4s; }
+  .recit-points span.actif { height: 46px; background: var(--vert); box-shadow: 0 0 14px rgba(43,255,158,.5); }
+  .etape { min-height: 74vh; display: flex; flex-direction: column; justify-content: center; max-width: 470px; opacity: .25; transition: opacity .5s; }
+  .etape.actif { opacity: 1; }
+  .etape svg { width: 34px; height: 34px; color: var(--vert); }
+  .etape h3 { font-family: var(--titre); font-size: clamp(28px, 3vw, 40px); line-height: 1.08; letter-spacing: -0.03em; margin: 18px 0 14px; }
+  .etape p { font-size: 18px; color: #C9C7DC; }
+  .etape-img { display: none; }
 
   /* ── Chiffres ── */
   .chiffres { display: grid; grid-template-columns: repeat(4, 1fr); gap: 22px; margin-top: 64px; }
@@ -143,21 +164,32 @@
   @media (prefers-reduced-motion: reduce) {
     .apparait { opacity: 1; transform: none; transition: none; }
     .puce, .surtitre::before { animation: none; }
+    h1 .mot, h1 em.mot { animation: none; opacity: 1; transform: none; }
+    .recit-tel .ecran { transition: none; }
   }
+  @keyframes berce { 50% { transform: rotateZ(3deg) translateY(-10px); } }
+  @media (hover: none), (pointer: coarse) {
+    .accroche .telephone { animation: berce 7s ease-in-out infinite; }
+  }
+  @media (hover: none) and (prefers-reduced-motion: reduce) { .accroche .telephone { animation: none; } }
 
   @media (max-width: 900px) {
     nav { display: none; }
-    .accroche .enveloppe, .produit, .annonceurs { grid-template-columns: 1fr; }
+    .accroche .enveloppe, .recit, .annonceurs { grid-template-columns: 1fr; }
+    .recit-scene { display: none; }
+    .etape { min-height: 0; opacity: 1; padding: 34px 0; border-bottom: 1px solid var(--trait); }
+    .etape-img { display: block; width: min(230px, 64vw); margin: 0 auto 28px; border-radius: 30px; box-shadow: 0 0 0 8px #1A1636, 0 0 0 9px rgba(255,255,255,.12), 0 30px 70px rgba(0,0,0,.5); }
     .accroche { padding-top: 110px; }
-    .telephone { width: min(250px, 70vw); }
+    .scene-tel { width: min(250px, 70vw); }
     .puce.p1 { left: -30px; } .puce.p2 { right: -26px; }
-    .atouts, .engagement { grid-template-columns: 1fr; }
+    .engagement { grid-template-columns: 1fr; }
     .chiffres { grid-template-columns: 1fr 1fr; gap: 14px; }
     section.bloc { padding: 96px 0; }
   }
 </style>
 </head>
 <body class="sans-js">
+<div class="projecteur" id="projecteur" aria-hidden="true"></div>
 
 <header id="tete">
   <div class="enveloppe barre">
@@ -177,17 +209,24 @@
   <div class="enveloppe">
     <div>
       <span class="surtitre apparait">Sports media &amp; technology</span>
-      <h1 class="apparait">Where match day <em>starts.</em></h1>
+      <h1><span class="mot" style="--i:0">Where</span> <span class="mot" style="--i:1">match</span> <span class="mot" style="--i:2">day</span> <em class="mot" style="--i:3">starts.</em></h1>
       <p class="chapo apparait">Skillart Group builds NinjaScores, the app football fans open before every kick-off: live scores, odds and rated predictions, in their language.</p>
       <div class="actions apparait">
         <a class="pilule plein" href="https://wa.me/31626070053" target="_blank" rel="noopener"><svg class="wa" viewBox="0 0 24 24" aria-hidden="true"><path fill="#25D366" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Z"/><path fill="#fff" d="M17.4 14.6c-.3-.1-1.7-.8-1.9-.9-.3-.1-.5-.1-.6.1l-.9 1.1c-.2.2-.3.2-.6.1a7.6 7.6 0 0 1-3.8-3.3c-.3-.5.3-.5.8-1.6.1-.2 0-.4 0-.5l-.9-2c-.2-.6-.5-.5-.6-.5h-.5a1 1 0 0 0-.7.3c-.3.3-1 1-1 2.4s1 2.8 1.2 3c.1.2 2 3.1 5 4.3 1.8.8 2.5.8 3.4.7.6-.1 1.7-.7 1.9-1.4.2-.7.2-1.2.2-1.4-.1-.1-.3-.2-.5-.3Z"/></svg>Partner with us</a>
         <a class="pilule" href="#ninjascores">Discover NinjaScores</a>
       </div>
     </div>
-    <div class="telephone apparait">
-      <img src="img/ecran-accueil.jpg" alt="NinjaScores home screen with the match of the day">
-      <div class="puce p1"><b>●</b> Live scores</div>
-      <div class="puce p2">Rated <b>8/10</b> predictions</div>
+    <div class="scene-tel apparait">
+      <div class="telephone" id="telHaut">
+        <video id="videoHaut" autoplay muted loop playsinline preload="auto" poster="img/ecran-accueil.jpg" aria-label="NinjaScores home screen scrolling through the match of the day, Ninja Alerts and news">
+          <source src="img/ecran-accueil.webm" type="video/webm">
+          <source src="img/ecran-accueil.mp4" type="video/mp4">
+        </video>
+        <div class="couche" id="coucheHaut">
+          <div class="puce p1"><b>●</b> Live scores</div>
+          <div class="puce p2">Rated <b>8/10</b> predictions</div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -209,29 +248,41 @@
     <span class="etiquette apparait">The platform</span>
     <h2 class="apparait">One app. <em>Every match that matters.</em></h2>
     <p class="intro apparait">NinjaScores turns match data into decisions. Fans check the score, read the stats, compare the odds and pick their bet, all in one place.</p>
-    <div class="produit">
-      <div class="telephone apparait"><img src="img/ecran-pronostics.jpg" alt="NinjaScores predictions tab"></div>
-      <div class="atouts">
-        <div class="atout apparait">
+    <div class="recit">
+      <div class="recit-scene" aria-hidden="true">
+        <div class="telephone recit-tel">
+          <img class="ecran actif" src="img/ecran-match.jpg" alt="" loading="lazy">
+          <img class="ecran" src="img/ecran-cotes.jpg" alt="" loading="lazy">
+          <img class="ecran" src="img/ecran-pronostics.jpg" alt="" loading="lazy">
+          <img class="ecran" src="img/ecran-alertes.jpg" alt="" loading="lazy">
+        </div>
+        <div class="recit-points"><span class="actif"></span><span></span><span></span><span></span></div>
+      </div>
+      <div class="recit-etapes">
+        <article class="etape actif" data-i="0">
+          <img class="etape-img" src="img/ecran-match.jpg" alt="NinjaScores match page for Paris Saint-Germain against Lyon" loading="lazy">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
           <h3>Live scores &amp; alerts</h3>
-          <p>Goals, half-time and full-time pushed in real time for favourite teams and players.</p>
-        </div>
-        <div class="atout apparait">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 19V9M10 19V5M16 19v-7M22 19H2"/></svg>
-          <h3>Rated predictions</h3>
-          <p>Every pick scored out of 10 from the last ten matches of both teams. Data, not hunches.</p>
-        </div>
-        <div class="atout apparait">
+          <p>Every match page brings the score, line-ups, stats and match info together. Goals, half-time and full-time are pushed in real time for favourite teams and players.</p>
+        </article>
+        <article class="etape" data-i="1">
+          <img class="etape-img" src="img/ecran-cotes.jpg" alt="NinjaScores odds tab with full-time, double chance and first-half markets" loading="lazy">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="M3 10h18M8 15h3"/></svg>
           <h3>Odds next to the stats</h3>
-          <p>Pre-match odds and boosted odds shown beside the data, at the moment the bet is decided.</p>
-        </div>
-        <div class="atout apparait">
+          <p>Pre-match odds sit beside the data, market by market, with the probability behind each price. The bet is decided here.</p>
+        </article>
+        <article class="etape" data-i="2">
+          <img class="etape-img" src="img/ecran-pronostics.jpg" alt="NinjaScores tips tab with rated daily predictions" loading="lazy">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 19V9M10 19V5M16 19v-7M22 19H2"/></svg>
+          <h3>Rated predictions</h3>
+          <p>Every pick is scored out of 10 from the last ten matches of both teams. Data, not hunches.</p>
+        </article>
+        <article class="etape" data-i="3">
+          <img class="etape-img" src="img/ecran-alertes.jpg" alt="NinjaScores home screen with the Ninja Alerts Telegram channel" loading="lazy">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M21 4 3 11l7 2 2 7 3-5 5 4z"/></svg>
           <h3>Community every day</h3>
           <p>Daily picks on Telegram and live shows on TikTok bring fans back before each match.</p>
-        </div>
+        </article>
       </div>
     </div>
   </div>
@@ -242,10 +293,10 @@
     <span class="etiquette apparait">In numbers</span>
     <h2 class="apparait">Launched in Sept 2026. <em>Growing every week.</em></h2>
     <div class="chiffres">
-      <div class="rond apparait"><strong class="chiffre"><span data-vers="11">11</span>k+</strong><small>Monthly active users</small></div>
-      <div class="rond apparait"><strong class="chiffre"><span data-vers="2000" data-sep="1">2,000</span></strong><small>Daily active users</small></div>
-      <div class="rond apparait"><strong class="chiffre"><span data-vers="15">15</span>k+</strong><small>Monthly clicks to partners</small></div>
-      <div class="rond apparait"><strong class="chiffre"><span>4.3</span></strong><small>Google Play rating</small></div>
+      <div class="rond lueur apparait"><strong class="chiffre"><span data-vers="11">11</span>k+</strong><small>Monthly active users</small></div>
+      <div class="rond lueur apparait"><strong class="chiffre"><span data-vers="2000" data-sep="1">2,000</span></strong><small>Daily active users</small></div>
+      <div class="rond lueur apparait"><strong class="chiffre"><span data-vers="15">15</span>k+</strong><small>Monthly clicks to partners</small></div>
+      <div class="rond lueur apparait"><strong class="chiffre"><span>4.3</span></strong><small>Google Play rating</small></div>
     </div>
     <p class="source apparait">Internal data, last 30 days, October 2026. Android, iPhone and web.</p>
   </div>
@@ -285,9 +336,9 @@
     <span class="etiquette apparait">Responsibility</span>
     <h2 class="apparait">Built for adults. <em>Played responsibly.</em></h2>
     <div class="engagement">
-      <div class="apparait"><b>18+ only</b><p>Betting content is never shown to minors. The iPhone app is rated 18+ on the App Store.</p></div>
-      <div class="apparait"><b>Local rules first</b><p>In regulated markets we only show locally licensed operators, such as ANJ-approved brands in France.</p></div>
-      <div class="apparait"><b>Safer gambling</b><p>Every partner placement carries the responsible gambling message required in the user’s market.</p></div>
+      <div class="lueur apparait"><b>18+ only</b><p>Betting content is never shown to minors. The iPhone app is rated 18+ on the App Store.</p></div>
+      <div class="lueur apparait"><b>Local rules first</b><p>In regulated markets we only show locally licensed operators, such as ANJ-approved brands in France.</p></div>
+      <div class="lueur apparait"><b>Safer gambling</b><p>Every partner placement carries the responsible gambling message required in the user’s market.</p></div>
     </div>
   </div>
 </section>
@@ -345,6 +396,63 @@
     el.style.transitionDelay = (i % 4) * 0.08 + 's';
     obs.observe(el);
   });
+
+  var souris = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+
+  // Vidéo de l'écran : image fixe si l'utilisateur a réduit les animations
+  var video = document.getElementById('videoHaut');
+  if (calme && video) { video.removeAttribute('autoplay'); video.pause(); }
+
+  // Téléphone du haut : il s'incline vers la souris, le reflet glisse,
+  // les pastilles bougent à une autre profondeur
+  var tel = document.getElementById('telHaut'), couche = document.getElementById('coucheHaut');
+  var accroche = document.querySelector('.accroche');
+  if (souris && !calme && tel) {
+    var cible = { x: 0, y: 0 }, pos = { x: 0, y: 0 }, anime = false;
+    var bouge = function () {
+      pos.x += (cible.x - pos.x) * 0.08; pos.y += (cible.y - pos.y) * 0.08;
+      tel.style.setProperty('--ry', (pos.x * 16).toFixed(2) + 'deg');
+      tel.style.setProperty('--rx', (-pos.y * 11).toFixed(2) + 'deg');
+      tel.style.setProperty('--gx', (30 + pos.x * 60).toFixed(1) + '%');
+      tel.style.setProperty('--gy', (15 + pos.y * 50).toFixed(1) + '%');
+      couche.style.setProperty('--px', (pos.x * 26).toFixed(1) + 'px');
+      couche.style.setProperty('--py', (pos.y * 18).toFixed(1) + 'px');
+      if (Math.abs(cible.x - pos.x) + Math.abs(cible.y - pos.y) > 0.002) requestAnimationFrame(bouge); else anime = false;
+    };
+    var relance = function () { if (!anime) { anime = true; requestAnimationFrame(bouge); } };
+    accroche.addEventListener('pointermove', function (e) {
+      var r = accroche.getBoundingClientRect();
+      cible.x = (e.clientX - r.left) / r.width - 0.5; cible.y = (e.clientY - r.top) / r.height - 0.5; relance();
+    });
+    accroche.addEventListener('pointerleave', function () { cible.x = 0; cible.y = 0; relance(); });
+  }
+
+  // Halo violet qui suit la souris, lueur des cartes survolées
+  var proj = document.getElementById('projecteur');
+  if (souris && !calme) {
+    document.addEventListener('pointermove', function (e) {
+      proj.style.setProperty('--x', e.clientX + 'px'); proj.style.setProperty('--y', e.clientY + 'px'); proj.classList.add('on');
+      var carte = e.target.closest && e.target.closest('.lueur');
+      if (carte) { var r = carte.getBoundingClientRect(); carte.style.setProperty('--mx', (e.clientX - r.left) + 'px'); carte.style.setProperty('--my', (e.clientY - r.top) + 'px'); }
+    }, { passive: true });
+    document.documentElement.addEventListener('pointerleave', function () { proj.classList.remove('on'); });
+  }
+
+  // La plateforme racontée au défilement : l'étape au centre de l'écran
+  // choisit l'écran affiché dans le téléphone
+  var etapes = [].slice.call(document.querySelectorAll('.etape'));
+  var ecrans = [].slice.call(document.querySelectorAll('.recit-tel .ecran'));
+  var points = [].slice.call(document.querySelectorAll('.recit-points span'));
+  var actuelle = 0, attente = false;
+  var choisir = function () {
+    attente = false;
+    var milieu = window.innerHeight / 2, mieux = actuelle, ecart = Infinity;
+    etapes.forEach(function (el, i) { var r = el.getBoundingClientRect(), d = Math.abs(r.top + r.height / 2 - milieu); if (d < ecart) { ecart = d; mieux = i; } });
+    if (mieux === actuelle) return;
+    actuelle = mieux;
+    [etapes, ecrans, points].forEach(function (liste) { liste.forEach(function (el, i) { el.classList.toggle('actif', i === mieux); }); });
+  };
+  window.addEventListener('scroll', function () { if (!attente) { attente = true; requestAnimationFrame(choisir); } }, { passive: true });
 
   // Champ de points lumineux dans l'accroche
   var c = document.getElementById('champ'), ctx = c.getContext('2d'), pts = [], w, h, r = window.devicePixelRatio || 1;
