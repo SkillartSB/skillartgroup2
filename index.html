@@ -35,7 +35,7 @@
   header.colle { background: rgba(5, 6, 15, 0.78); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border-color: var(--trait); }
   .barre { display: flex; align-items: center; justify-content: space-between; height: 76px; }
   .logo { display: flex; align-items: center; gap: 12px; font-family: var(--titre); font-weight: 800; letter-spacing: 0.14em; font-size: 14px; }
-  .logo i { width: 30px; height: 30px; border-radius: 9px; background: linear-gradient(140deg, var(--violet-clair), var(--violet) 55%, #2C1A7A); box-shadow: 0 0 24px rgba(107, 60, 240, .6); display: grid; place-items: center; font-style: normal; font-size: 15px; letter-spacing: 0; }
+  .logo img { height: 30px; width: auto; filter: drop-shadow(0 0 14px rgba(156, 123, 255, .35)); }
   nav { display: flex; gap: 34px; font-size: 15px; color: #CFCDE2; }
   nav a:hover { color: #fff; }
   .pilule { display: inline-flex; align-items: center; gap: 8px; border: 1px solid rgba(255,255,255,.4); border-radius: 999px; padding: 9px 18px; font-size: 15px; font-weight: 500; transition: background .2s, color .2s; }
@@ -98,7 +98,16 @@
 
   /* ── Annonceurs ── */
   .annonceurs { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
-  .vitrine { border-radius: 28px; overflow: hidden; border: 1px solid var(--trait); box-shadow: 0 40px 100px rgba(0,0,0,.5); background: #ECEAF6; }
+  .vitrine-bloc { justify-self: center; width: min(440px, 100%); }
+  .vitrine-bloc figcaption { margin-top: 16px; text-align: center; font-size: 13px; color: var(--doux); }
+  .banniere { border-radius: 26px; overflow: hidden; padding: 26px 26px 0; background: linear-gradient(140deg, #3B1FA8, #1B0F55 70%); box-shadow: 0 40px 100px rgba(0,0,0,.55), 0 0 0 1px rgba(255,255,255,.08), 0 0 80px rgba(107,60,240,.35); }
+  .banniere-tete { display: flex; justify-content: space-between; align-items: center; font-size: 11px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; color: rgba(255,255,255,.75); }
+  .banniere-tete .marque { font-family: var(--titre); font-size: 15px; letter-spacing: .08em; color: #fff; border: 1.5px dashed rgba(255,255,255,.55); border-radius: 8px; padding: 5px 10px; }
+  .banniere-montant { font-family: var(--titre); font-weight: 800; font-size: 86px; line-height: .95; letter-spacing: -.04em; margin-top: 18px; }
+  .banniere-or { font-family: var(--titre); font-weight: 800; font-style: italic; font-size: 40px; line-height: 1; text-transform: uppercase; background: linear-gradient(180deg, #FFF1B8, #F5C451 45%, #C98E1E 80%, #F2C14E); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .banniere p { font-size: 13px; color: rgba(255,255,255,.7); margin: 8px 0 18px; }
+  .banniere-bouton { display: block; text-align: center; background: #fff; color: #1B0F55; font-weight: 800; border-radius: 14px; padding: 14px; font-size: 16px; }
+  .banniere-legal { margin: 20px -26px 0; padding: 12px 26px; background: #FFE14D; color: #1A1400; font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: .02em; }
   .emplacements { list-style: none; margin-top: 30px; display: grid; gap: 2px; }
   .emplacements li { display: flex; justify-content: space-between; gap: 20px; padding: 16px 0; border-bottom: 1px solid var(--trait); font-size: 16px; }
   .emplacements li span:last-child { color: var(--doux); text-align: right; }
@@ -115,6 +124,7 @@
   .contact { text-align: center; padding: 160px 0; position: relative; overflow: hidden; }
   .contact::before { content: ''; position: absolute; left: 50%; top: 50%; width: 1100px; height: 600px; transform: translate(-50%, -50%); background: radial-gradient(closest-side, rgba(107,60,240,.35), transparent 70%); pointer-events: none; }
   .contact h2 { font-size: clamp(56px, 9vw, 128px); position: relative; }
+  .logo-grand { width: 200px; height: auto; margin: 0 auto 36px; position: relative; }
   .contact .actions { justify-content: center; position: relative; }
 
   footer { border-top: 1px solid var(--trait); padding: 36px 0 44px; color: var(--doux); font-size: 14px; }
@@ -145,7 +155,7 @@
 
 <header id="tete">
   <div class="enveloppe barre">
-    <a class="logo" href="#"><i>S</i>SKILLART GROUP</a>
+    <a class="logo" href="#"><img src="img/skillart-embleme.png" alt="" width="34" height="30">SKILLART GROUP</a>
     <nav>
       <a href="#ninjascores">NinjaScores</a>
       <a href="#annonceurs">Advertise</a>
@@ -245,7 +255,17 @@
       </ul>
       <div class="modeles apparait"><span>CPA</span><span>Hybrid</span><span>Fixed-fee sponsorship</span></div>
     </div>
-    <div class="vitrine apparait"><img src="img/emplacement-accueil.jpg" alt="Example of a partner banner on the NinjaScores home screen"></div>
+    <figure class="vitrine-bloc apparait">
+      <div class="banniere" role="img" aria-label="Example of a partner banner on the NinjaScores home screen">
+        <div class="banniere-tete"><span class="marque">YOUR BRAND</span><span>Official partner</span></div>
+        <div class="banniere-montant">€100</div>
+        <div class="banniere-or">Welcome bonus*</div>
+        <p>*New customers only. Terms apply. 18+.</p>
+        <span class="banniere-bouton">Create my account →</span>
+        <div class="banniere-legal">18+ · Gamble responsibly · Safer gambling message of the user’s market</div>
+      </div>
+      <figcaption>Example of a home screen placement</figcaption>
+    </figure>
   </div>
 </section>
 
@@ -263,6 +283,7 @@
 
 <section class="contact" id="contact">
   <div class="enveloppe">
+    <img class="logo-grand apparait" src="img/skillart-group-logo.png" alt="Skillart Group">
     <span class="etiquette apparait">Let’s work together</span>
     <h2 class="apparait">Let’s talk.</h2>
     <div class="actions apparait">
